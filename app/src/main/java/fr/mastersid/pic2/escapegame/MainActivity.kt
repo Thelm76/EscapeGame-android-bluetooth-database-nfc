@@ -1,4 +1,4 @@
-package fr.mastersid.martinez.escapegame
+package fr.mastersid.pic2.escapegame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
