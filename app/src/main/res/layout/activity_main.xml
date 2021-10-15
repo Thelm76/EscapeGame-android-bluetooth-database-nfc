@@ -9,8 +9,8 @@
 <fragment
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentQuestions"
-    android:name="fr.mastersid.martinez.stackoverflow.view.StacksFragment"
+    android:id="@+id/fragmentStart"
+    android:name="fr.mastersid.pic2.escapegame.view.FragmentStart"
     tools:layout="@layout/start_fragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
