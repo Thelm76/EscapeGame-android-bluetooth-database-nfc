@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
@@ -39,20 +40,37 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:foregroundGravity="center">
 
-        <TextView
-            android:id="@+id/textView4"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/slot" />
+
+        <ImageView
+            android:id="@+id/imageview_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
-            android:text="Règles du jeu :  Chaque participant doit trouver un des objets ci-dessus, et le scanner avec module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur."
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:layout_gravity="center"
+            android:contentDescription="item"
+            app:srcCompat="@drawable/no_item" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="Règles du jeu :  Chaque participant doit trouver un des objets ci-dessus, et le scanner avec module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur."
+        android:textSize="20sp" />
+
 </LinearLayout>

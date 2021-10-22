@@ -5,20 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import fr.mastersid.pic2.escapegame.databinding.LobyFragmentBinding
-import fr.mastersid.pic2.escapegame.databinding.StartFragmentBinding
+import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
-class FragmentLoby: Fragment() {
-    private lateinit var _binding : LobyFragmentBinding
+class StartFragment: Fragment() {
+    private lateinit var _binding :FragmentStartBinding
     override fun onCreateView (
         inflater : LayoutInflater,
         container : ViewGroup?,
         savedInstanceState : Bundle?
     ): View {
-        _binding = LobyFragmentBinding.inflate(inflater)
+        _binding = FragmentStartBinding.inflate(inflater)
         return _binding.root
     }
 

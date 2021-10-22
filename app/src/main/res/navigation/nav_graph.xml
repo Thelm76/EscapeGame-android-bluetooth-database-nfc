@@ -6,25 +6,25 @@
     app:startDestination="@id/fragmentStart">
     <fragment
         android:id="@+id/fragmentStart"
-        android:name="fr.mastersid.pic2.escapegame.view.FragmentStart"
+        android:name="fr.mastersid.pic2.escapegame.view.StartFragment"
         android:label="FragmentStart"
-        tools:layout="@layout/start_fragment">
+        tools:layout="@layout/fragment_start">
         <action
             android:id="@+id/action_fragmentStart_to_fragmentLoby"
             app:destination="@id/fragmentLoby" />
     </fragment>
     <fragment
         android:id="@+id/fragmentLoby"
-        android:name="fr.mastersid.pic2.escapegame.view.FragmentLoby"
+        android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
         android:label="FragmentLoby"
-        tools:layout="@layout/loby_fragment">
+        tools:layout="@layout/fragment_loby">
         <action
             android:id="@+id/action_fragmentLoby_to_fragmentNfc"
             app:destination="@id/fragmentNfc" />
     </fragment>
     <fragment
         android:id="@+id/fragmentNfc"
-        android:name="fr.mastersid.pic2.escapegame.view.FragmentNfc"
+        android:name="fr.mastersid.pic2.escapegame.view.NfcFragment"
         android:label="FragmentNfc"
-        tools:layout="@layout/nfc_fragment"/>
+        tools:layout="@layout/fragment_nfc"/>
 </navigation>
