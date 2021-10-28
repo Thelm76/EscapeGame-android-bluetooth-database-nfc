@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/drawable/btn_default.xml" value="0.2703125" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/activity_main.xml" value="0.115625" />
-        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_loby.xml" value="0.1265625" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_loby.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_nfc.xml" value="0.264" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_start.xml" value="0.115625" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/loby_fragment.xml" value="0.115625" />
