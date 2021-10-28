@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentNfc"
-        android:name="fr.mastersid.pic2.escapegame.view.NfcFragment"
+        android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
         android:label="FragmentNfc"
-        tools:layout="@layout/fragment_nfc"/>
+        tools:layout="@layout/fragment_items"/>
 </navigation>

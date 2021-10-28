@@ -9,6 +9,9 @@
         <entry key="app/src/main/res/drawable/obj1.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/obj2.xml" value="0.28425925925925927" />
         <entry key="app/src/main/res/drawable/obj3.xml" value="0.28425925925925927" />
+        <entry key="app/src/main/res/layout/fragment_fusion.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_items.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/fragment_loby.xml" value="0.15625" />
         <entry key="app/src/main/res/layout/fragment_nfc.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/loby_fragment.xml" value="0.296195652173913" />

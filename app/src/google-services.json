@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274829282168",
+    "project_id": "escapegamedatabase",
+    "storage_bucket": "escapegamedatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274829282168:android:22359037aeb23328fdd68d",
+        "android_client_info": {
+          "package_name": "fr.mastersid.pic2.escapegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274829282168-1pj5c2mhg8bphnn664rn62k04aoe3g4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7HGIxfKBDSm8Ku0D25HywmtfxDg26mkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274829282168-1pj5c2mhg8bphnn664rn62k04aoe3g4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

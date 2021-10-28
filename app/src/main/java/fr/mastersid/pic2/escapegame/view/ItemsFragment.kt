@@ -5,27 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import fr.mastersid.pic2.escapegame.R
-import fr.mastersid.pic2.escapegame.databinding.FragmentNfcBinding
-import fr.mastersid.pic2.escapegame.viewModel.NfcViewModel
+import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
+import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
 @AndroidEntryPoint
-class NfcFragment : Fragment(){
-    private lateinit var _binding : FragmentNfcBinding
+class ItemsFragment : Fragment(){
+    private lateinit var _binding : FragmentItemsBinding
 
     override fun onCreateView (
         inflater : LayoutInflater,
         container : ViewGroup?,
         savedInstanceState : Bundle?
     ): View {
-        _binding = FragmentNfcBinding.inflate(inflater)
+        _binding = FragmentItemsBinding.inflate(inflater)
         return _binding.root
     }
 
@@ -33,9 +31,10 @@ class NfcFragment : Fragment(){
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
 
-        val nfcViewModel: NfcViewModel by viewModels()
+        val itemsViewModel: ItemsViewModel by viewModels()
 
-        nfcViewModel.item.observe(this){ item ->
+        itemsViewModel.itemNFC.observe(this){ item ->
+            itemsViewModel.updateDesc()
             try {
                 _binding.imageviewItem.setImageDrawable(
                     getDrawable(
@@ -49,6 +48,11 @@ class NfcFragment : Fragment(){
                         resources.getIdentifier("no_item", "drawable", context?.packageName)
                     ))
             }
+        }
+
+
+        itemsViewModel.itemDesc.observe(this){ desc ->
+            _binding.itemName.text=desc
         }
     }
 

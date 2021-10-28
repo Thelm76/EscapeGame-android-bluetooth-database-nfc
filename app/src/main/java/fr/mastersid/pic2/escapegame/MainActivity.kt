@@ -6,6 +6,8 @@ import android.nfc.NfcAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.utils.EGNFC
 import javax.inject.Inject
@@ -20,7 +22,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
 
         pendingIntent = PendingIntent.getActivity(this, 0,
             Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
@@ -30,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             //logMessage("Found intent in onCreate", intent.action.toString())
             processIntent(intent)
         }
+
     }
 
     override fun onResume() {

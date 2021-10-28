@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragmentStart"
-    android:name="fr.mastersid.pic2.escapegame.view.NfcFragment"
-    tools:layout="@layout/fragment_nfc"/>
+    android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
+    tools:layout="@layout/fragment_items"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

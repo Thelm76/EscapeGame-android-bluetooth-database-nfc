@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:text="Trouver les objets suivant :"
+        android:text="Objets trouvés"
         android:textSize="20sp" />
 
     <LinearLayout
@@ -49,6 +49,13 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:foregroundGravity="center">
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            tools:text="Nom de l'objet" />
 
         <ImageView
             android:id="@+id/imageView2"
