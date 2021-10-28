@@ -1,5 +1,6 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,5 +11,6 @@ import javax.inject.Inject
 class NfcViewModel @Inject constructor(
     private val repository: NfcRepository
 ): ViewModel() {
-    val item = repository.lastScan.asLiveData()
+    private val _item: LiveData<String> = repository.lastScan.asLiveData()
+    val item get() = _item
 }
