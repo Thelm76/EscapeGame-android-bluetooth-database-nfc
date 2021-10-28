@@ -19,6 +19,8 @@
             android:text="Trouver les objets suivant :"
             android:textSize="20sp" />
 
+
+
     </LinearLayout>
 
     <LinearLayout

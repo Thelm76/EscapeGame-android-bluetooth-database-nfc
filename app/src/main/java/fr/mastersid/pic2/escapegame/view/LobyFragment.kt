@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 
 /**
@@ -24,6 +25,8 @@ class LobyFragment: Fragment() {
 
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
+        val args : LobyFragmentArgs by navArgs()
 
+        _binding.player.text=args.playerNumber.toString()
     }
 }
