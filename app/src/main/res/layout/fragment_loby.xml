@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/backgroundBaseColor"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -12,14 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
         android:text="En attente des joueurs, la partie se lancera quand tout le monde sera prêt :"
-        android:textSize="20sp"
-        />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="25dp">
+        android:layout_marginHorizontal="25dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,13 +109,13 @@
 
         <Button
             android:id="@+id/play_button"
+            style="@style/srp_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="25dp"
             android:layout_marginBottom="15dp"
             android:enabled="false"
-            style="@style/srp_button"
             android:text="Play" />
     </LinearLayout>
 

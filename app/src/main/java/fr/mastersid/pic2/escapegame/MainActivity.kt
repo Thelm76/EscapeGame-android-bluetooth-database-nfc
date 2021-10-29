@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
+import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
 import javax.inject.Inject
 
@@ -20,14 +21,15 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var nfcHandler: EGNFC
+    private lateinit var _binding : ActivityMainBinding
 
     private var pendingIntent: PendingIntent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(_binding.root)
+        setSupportActionBar(_binding.toolbar)
 
         pendingIntent = PendingIntent.getActivity(this, 0,
             Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
@@ -70,10 +72,13 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_menu,menu)
         return true
     }
+
+
     override fun onOptionsItemSelected(item:MenuItem):Boolean {
         Log.d("test","---------------------------------------")
         val intent = Intent(this, PopUpWindow::class.java)
-        intent.putExtra("popuptext", "voici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu voici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeuvoici la fenetre qui servira a afficher les instructions pour chaque jeu")
+        intent.putExtra("popuptitle", "Error")
+        intent.putExtra("popuptext", "voici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\n")
         intent.putExtra("popupbtn", "OK")
         intent.putExtra("darkstatusbar", false)
         startActivity(intent)
