@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentStart">
+    <fragment
+        android:id="@+id/fragmentStart"
+        android:name="fr.mastersid.pic2.escapegame.view.StartFragment"
+        android:label="FragmentStart"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_fragmentStart_to_fragmentLoby"
+            app:destination="@id/fragmentLoby" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLoby"
+        android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
+        android:label="FragmentLoby"
+        tools:layout="@layout/fragment_loby">
+        <action
+            android:id="@+id/action_fragmentLoby_to_fragmentNfc"
+            app:destination="@id/fragmentNfc" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentNfc"
+        android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
+        android:label="FragmentNfc"
+        tools:layout="@layout/fragment_items"/>
+</navigation>
