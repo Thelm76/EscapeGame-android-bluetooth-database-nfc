@@ -13,6 +13,7 @@
             android:id="@+id/action_startFragment_to_lobyFragment"
             app:destination="@id/lobyFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/lobyFragment"
         android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
@@ -27,9 +28,18 @@
             android:id="@+id/action_lobyFragment_to_nfcFragment"
             app:destination="@id/nfcFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/nfcFragment"
         android:name="fr.mastersid.pic2.escapegame.view.NfcFragment"
         android:label="NfcFragment"
-        tools:layout="@layout/fragment_nfc"/>
+        tools:layout="@layout/fragment_nfc">
+        <argument
+            android:name="PlayerNumber"
+            app:argType="integer" />
+    </fragment>
+
+    <argument
+        android:name="playerNumber"
+        app:argType="integer" />
 </navigation>

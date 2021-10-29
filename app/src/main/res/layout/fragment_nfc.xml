@@ -26,7 +26,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="15dp">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -72,12 +73,43 @@
             app:srcCompat="@drawable/no_item" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:text="Règles du jeu :  Chaque participant doit trouver un des objets ci-dessus, et le scanner avec module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur."
-        android:textSize="18sp" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_fusion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:text="Fusionner" />
+        <Button
+            android:id="@+id/button_suivant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:enabled="false"
+            android:text="Suivant" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:text="Règles du jeu :  Chaque participant doit trouver un des objets ci-dessus, et le scanner avec module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur."
+                android:textSize="18sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

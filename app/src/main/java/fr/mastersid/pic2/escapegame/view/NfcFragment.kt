@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentNfcBinding
 import fr.mastersid.pic2.escapegame.viewModel.NfcViewModel
@@ -30,7 +31,8 @@ class NfcFragment : Fragment(){
 
     override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
         super.onViewCreated (view , savedInstanceState )
-
+        
+        val args : NfcFragmentArgs by navArgs()
         val nfcViewModel: NfcViewModel by viewModels()
 
         nfcViewModel.item.observe(this){ item ->
