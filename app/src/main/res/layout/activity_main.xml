@@ -10,14 +10,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        app:titleTextColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#D32F2F"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark" />
+        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Dark"
+        app:titleTextColor="@color/white" />
 
     <fragment
         android:id="@+id/navHostFragment"

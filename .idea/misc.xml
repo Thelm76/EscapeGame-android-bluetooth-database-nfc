@@ -7,14 +7,16 @@
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/activity_pop_up_help.xml" value="0.12291666666666666" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_help.xml" value="0.1" />
-        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_loby.xml" value="0.378125" />
-        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_nfc.xml" value="0.3776041666666667" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_loby.xml" value="0.3515625" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_nfc.xml" value="0.3515625" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/fragment_start.xml" value="0.3717948717948718" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/loby_fragment.xml" value="0.115625" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/nfc_fragment.xml" value="0.1265625" />
-        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/popup_window.xml" value="0.6" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/layout/popup_window.xml" value="0.3776041666666667" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/menu/nav_drawer_menu.xml" value="0.13125" />
         <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/menu/toolbar_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14739583333333334" />
+        <entry key="..\:/Users/hp/Desktop/Projet-S1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.14739583333333334" />
       </map>
     </option>
   </component>

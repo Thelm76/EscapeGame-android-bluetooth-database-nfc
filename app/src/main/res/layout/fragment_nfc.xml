@@ -7,26 +7,31 @@
     android:background="@color/backgroundBaseColor"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:cardPreventCornerOverlap="false">
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="25dp"
             android:text="Trouver les objets suivant :"
+            android:textColor="@color/white"
             android:textSize="20sp" />
-
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
+        android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -52,11 +57,10 @@
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="20dp"
-        android:foregroundGravity="center">
+        android:layout_marginHorizontal="20dp">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -75,8 +79,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp">
 
         <Button
             android:id="@+id/button_fusion"
@@ -93,24 +99,5 @@
             android:enabled="false"
             android:text="Suivant" />
     </LinearLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:text="Règles du jeu :  Chaque participant doit trouver un des objets ci-dessus, et le scanner avec module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur."
-                android:textSize="18sp" />
-        </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

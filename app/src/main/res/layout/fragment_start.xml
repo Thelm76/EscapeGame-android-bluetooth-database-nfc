@@ -29,7 +29,6 @@
             android:layout_gravity="bottom"
             android:layout_margin="15dp"
 
-            android:layout_weight="1"
             android:text="P 1" />
 
         <Button
@@ -39,7 +38,6 @@
             android:layout_gravity="bottom"
             android:layout_margin="15dp"
 
-            android:layout_weight="1"
             android:text="P 2" />
 
         <Button
@@ -49,7 +47,6 @@
             android:layout_gravity="bottom"
             android:layout_margin="15dp"
 
-            android:layout_weight="1"
             android:text="P 3" />
     </LinearLayout>
 

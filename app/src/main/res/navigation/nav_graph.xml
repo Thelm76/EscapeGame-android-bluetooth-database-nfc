@@ -42,10 +42,5 @@
     <argument
         android:name="playerNumber"
         app:argType="integer" />
-    <fragment
-        android:id="@+id/helpFragment"
-        android:name="fr.mastersid.pic2.escapegame.view.HelpFragment"
-        android:label="HelpFragment"
-        tools:layout="@layout/fragment_help"/>
 
 </navigation>

@@ -27,7 +27,7 @@
         <activity
             android:name=".PopUpWindow"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.PopUpWindowTheme"/>
+            android:theme="@style/PopUpWindowTheme"/>
     </application>
 
 </manifest>
