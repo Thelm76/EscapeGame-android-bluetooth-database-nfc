@@ -6,22 +6,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import fr.mastersid.pic2.escapegame.utils.EGFirebase
-import fr.mastersid.pic2.escapegame.utils.UsersItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
     escapeGameFirebase: EGFirebase
 ) {
-    private val _usersItems: MutableStateFlow<List<UsersItem>> = MutableStateFlow(emptyList())
+    private val _usersItems: MutableStateFlow<List<EGFirebase.UsersItem>> = MutableStateFlow(emptyList())
     val usersItems get ()= _usersItems
 
 
     init {
-        escapeGameFirebase.addDBListener("users", object : ValueEventListener {
+        escapeGameFirebase.addDBListener(EGFirebase.DB.USERS, object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 _usersItems.value = snapshot.children.map { dataSnapshot ->
-                    dataSnapshot.getValue(UsersItem::class.java)!!
+                    dataSnapshot.getValue(EGFirebase.UsersItem::class.java)!!
                 }
             }
 

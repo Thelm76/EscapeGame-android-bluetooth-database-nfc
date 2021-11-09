@@ -13,9 +13,10 @@ import fr.mastersid.pic2.escapegame.model.FirebaseCallback
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Singleton
 
-const val TAG3 : String="FirebaseRepository"
 
 class EGFirebase{
+    val TAG : String="FirebaseRepository"
+
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
     /*suspend fun writeUser(userId: String, connected: Int) {
@@ -32,21 +33,21 @@ class EGFirebase{
             }
     }*/
 
-    fun addDBListener(db: String, listener: ValueEventListener) {
+    fun addDBListener(db: DB, listener: ValueEventListener) {
         try {
-            database.getReference(db)
+            database.getReference(db.dbName)
                 .orderByChild("_rank")
                 .addValueEventListener(listener)
         }
         catch (e : Exception){
-            Log.e("erreur",e.stackTraceToString())
+            Log.e(TAG,"Failed adding listener : ${e.stackTraceToString()}")
         }
     }
 
-    inline fun <reified dataType> fetchFrom(db: String, child:String, callback: FirebaseCallback<dataType>) {
+    inline fun <reified dataType> fetchFrom(db: DB, child:String, callback: FirebaseCallback<dataType>) {
         var tItem: dataType?
 
-        database.getReference(db).child(child).addListenerForSingleValueEvent(
+        database.getReference(db.dbName).child(child).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     tItem = dataSnapshot.getValue<dataType>()
@@ -54,23 +55,30 @@ class EGFirebase{
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.w(ContentValues.TAG, "loadItem:onCancelled", error.toException())
+                    Log.w(TAG, "loadItem:onCancelled", error.toException())
                 }
             })
     }
 
+    enum class DB(val dbName:String) {
+        USERS("users"),
+        ITEMS("items"),
+        ENIGMAS("enigmas")
+    }
+
+    data class UsersItem(
+        var uid: String="",
+        var connected: Int=0
+    )
+
+    data class ItemItem(
+        var id: String="",
+        var img: String="",
+        var desc: String="empty desc"
+    )
 }
 
-data class UsersItem(
-    var uid: String="",
-    var connected: Int=0
-)
 
-data class ItemItem(
-    var id: String="",
-    var img: String="",
-    var desc: String="empty desc"
-)
 
 @InstallIn(SingletonComponent::class)
 @Module

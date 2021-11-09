@@ -1,14 +1,6 @@
 package fr.mastersid.pic2.escapegame.model
 
-import android.content.ContentValues
-import android.util.Log
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import fr.mastersid.pic2.escapegame.utils.EGFirebase
-import fr.mastersid.pic2.escapegame.utils.EGNFC
-import fr.mastersid.pic2.escapegame.utils.ItemItem
-import fr.mastersid.pic2.escapegame.utils.UsersItem
+import fr.mastersid.pic2.escapegame.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
@@ -24,8 +16,8 @@ class ItemsRepository @Inject constructor(
     val itemDesc get ()= _itemDesc
 
     fun fetchItem(itemName: String) {
-        escapeGameFirebase.fetchFrom("items", itemName, object: FirebaseCallback<ItemItem> {
-            override fun onCallback(value: ItemItem) {
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.ITEMS, itemName, object: FirebaseCallback<EGFirebase.ItemItem> {
+            override fun onCallback(value: EGFirebase.ItemItem) {
                 _itemDesc.value = value.desc
             }
         })
