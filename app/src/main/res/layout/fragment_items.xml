@@ -75,6 +75,13 @@
             android:layout_gravity="center"
             android:contentDescription="item"
             app:srcCompat="@drawable/no_item" />
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            tools:text="Object name" />
     </FrameLayout>
 
     <LinearLayout
