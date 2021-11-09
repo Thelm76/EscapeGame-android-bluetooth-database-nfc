@@ -1,18 +1,13 @@
 package fr.mastersid.pic2.escapegame.utils
 
-import android.content.ContentValues
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import fr.mastersid.pic2.escapegame.model.FirebaseCallback
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Singleton
-
 
 class EGFirebase{
     val TAG : String="FirebaseRepository"
@@ -72,13 +67,24 @@ class EGFirebase{
     )
 
     data class ItemItem(
-        var id: String="",
+        var id: String="no item",
         var img: String="",
         var desc: String="empty desc"
     )
+
+    data class EnigmaItem(
+        var qid: String="no question",
+        var answer: List<EnigmaAnswer>
+    )
+
+    data class EnigmaAnswer(
+        var aid: String="no answer"
+    )
 }
 
-
+interface FirebaseCallback<T> {
+    fun onCallback(value: T)
+}
 
 @InstallIn(SingletonComponent::class)
 @Module
