@@ -10,12 +10,12 @@ import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
-class LobyFragment: Fragment() {
-    private lateinit var _binding : FragmentLobyBinding
-    override fun onCreateView (
-        inflater : LayoutInflater,
-        container : ViewGroup?,
-        savedInstanceState : Bundle?
+class LobyFragment : Fragment() {
+    private lateinit var _binding: FragmentLobyBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLobyBinding.inflate(inflater)
         return _binding.root

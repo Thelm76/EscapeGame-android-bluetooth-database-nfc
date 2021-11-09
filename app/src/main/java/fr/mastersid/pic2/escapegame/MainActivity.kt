@@ -3,9 +3,8 @@ package fr.mastersid.pic2.escapegame
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.utils.EGNFC
 import javax.inject.Inject
@@ -22,8 +21,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        pendingIntent = PendingIntent.getActivity(this, 0,
-            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
+        pendingIntent = PendingIntent.getActivity(
+            this, 0,
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+        )
 
         if (intent != null) {
             // Check if the app was started via an NDEF intent
