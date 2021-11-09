@@ -16,38 +16,40 @@ import fr.mastersid.pic2.escapegame.viewModel.NfcViewModel
  *Created by Bryan BARRE on 15/10/2021.
  */
 @AndroidEntryPoint
-class NfcFragment : Fragment(){
-    private lateinit var _binding : FragmentNfcBinding
+class NfcFragment : Fragment() {
+    private lateinit var _binding: FragmentNfcBinding
 
-    override fun onCreateView (
-        inflater : LayoutInflater,
-        container : ViewGroup?,
-        savedInstanceState : Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentNfcBinding.inflate(inflater)
         return _binding.root
     }
 
 
-    override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
-        super.onViewCreated (view , savedInstanceState )
-        
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val args : NfcFragmentArgs by navArgs()
         val nfcViewModel: NfcViewModel by viewModels()
 
-        nfcViewModel.item.observe(this){ item ->
+        nfcViewModel.item.observe(this) { item ->
             try {
                 _binding.imageviewItem.setImageDrawable(
                     getDrawable(
                         this.requireContext(),
                         resources.getIdentifier(item, "drawable", context?.packageName)
-                    ))
-            } catch (e: Exception){
+                    )
+                )
+            } catch (e: Exception) {
                 _binding.imageviewItem.setImageDrawable(
                     getDrawable(
                         this.requireContext(),
                         resources.getIdentifier("no_item", "drawable", context?.packageName)
-                    ))
+                    )
+                )
             }
         }
     }

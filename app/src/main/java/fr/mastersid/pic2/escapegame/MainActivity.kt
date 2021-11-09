@@ -3,16 +3,13 @@ package fr.mastersid.pic2.escapegame
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.navigation.findNavController
-import androidx.navigation.ui.onNavDestinationSelected
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
-import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
 import javax.inject.Inject
 
@@ -31,8 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(_binding.root)
         setSupportActionBar(_binding.toolbar)
 
-        pendingIntent = PendingIntent.getActivity(this, 0,
-            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
+        pendingIntent = PendingIntent.getActivity(
+            this, 0,
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+        )
 
         if (intent != null) {
             // Check if the app was started via an NDEF intent
@@ -40,10 +39,6 @@ class MainActivity : AppCompatActivity() {
             processIntent(intent)
         }
     }
-
-
-
-
 
     override fun onResume() {
         super.onResume()

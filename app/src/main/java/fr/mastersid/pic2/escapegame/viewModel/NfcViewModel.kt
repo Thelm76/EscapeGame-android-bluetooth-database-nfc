@@ -10,7 +10,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NfcViewModel @Inject constructor(
     private val repository: NfcRepository
-): ViewModel() {
+) : ViewModel() {
     private val _item: LiveData<String> = repository.lastScan.asLiveData()
     val item get() = _item
 }

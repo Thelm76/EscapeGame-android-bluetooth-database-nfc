@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 
-
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
-class StartFragment: Fragment() {
-    private lateinit var _binding : FragmentStartBinding
-    override fun onCreateView (
-        inflater : LayoutInflater,
-        container : ViewGroup?,
-        savedInstanceState : Bundle?
+class StartFragment : Fragment() {
+    private lateinit var _binding: FragmentStartBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStartBinding.inflate(inflater)
         return _binding.root

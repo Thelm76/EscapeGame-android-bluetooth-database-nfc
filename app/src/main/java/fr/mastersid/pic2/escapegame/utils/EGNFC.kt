@@ -5,21 +5,24 @@ import android.content.Intent
 import android.nfc.NdefMessage
 import android.nfc.NfcAdapter
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import dagger.hilt.migration.DisableInstallInCheck
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EGNFC(context: Context) {
+class EGNFC @Inject constructor(
+    @ApplicationContext appcontext: Context
+) {
 
     // Pending intent for NFC intent foreground dispatch.
     // Used to read all NDEF tags while the app is running in the foreground.
+
+    private val TAG="EGNFC"
 
     private var _nfcAdapter : NfcAdapter? = null
     val nfcAdapter: NfcAdapter?
@@ -30,13 +33,13 @@ class EGNFC(context: Context) {
 
     init {
         // Check if NFC is supported and enabled
-        _nfcAdapter = NfcAdapter.getDefaultAdapter(context)
-        Log.d("EGNFC","NFC supported : " + (_nfcAdapter != null).toString())
-        Log.d("EGNFC","NFC enabled : " + (_nfcAdapter?.isEnabled).toString())
+        _nfcAdapter = NfcAdapter.getDefaultAdapter(appcontext)
+        Log.d(TAG, "NFC supported : " + (_nfcAdapter != null).toString())
+        Log.d(TAG, "NFC enabled : " + (_nfcAdapter?.isEnabled).toString())
     }
 
 
-    fun processIntent(intent: Intent){
+    fun processIntent(intent: Intent) {
 
         // Retrieve the raw NDEF message from the tag
         val rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
@@ -47,10 +50,10 @@ class EGNFC(context: Context) {
             if (ndefMsg.records != null && ndefMsg.records.isNotEmpty()) {
                 val ndefRecord = ndefMsg.records[0]
                 if (ndefRecord.toUri() != null) {
-                    Log.d("NFC","URI detected"+ndefRecord.toUri().toString())
+                    Log.d(TAG, "URI detected" + ndefRecord.toUri().toString())
                 } else {
-                    Log.d("NFC",String(ndefRecord.payload).substring(3))
-                    _lastScan.value=(String(ndefRecord.payload).substring(3))
+                    Log.d(TAG, String(ndefRecord.payload).substring(3))
+                    _lastScan.value = (String(ndefRecord.payload).substring(3))
                 }
             }
         }
