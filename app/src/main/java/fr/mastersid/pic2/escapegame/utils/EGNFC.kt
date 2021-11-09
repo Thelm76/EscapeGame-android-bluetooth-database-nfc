@@ -22,9 +22,9 @@ class EGNFC @Inject constructor(
     // Pending intent for NFC intent foreground dispatch.
     // Used to read all NDEF tags while the app is running in the foreground.
 
-    private val TAG="EGNFC"
+    private val TAG = "EGNFC"
 
-    private var _nfcAdapter : NfcAdapter? = null
+    private var _nfcAdapter: NfcAdapter? = null
     val nfcAdapter: NfcAdapter?
         get() = _nfcAdapter
 

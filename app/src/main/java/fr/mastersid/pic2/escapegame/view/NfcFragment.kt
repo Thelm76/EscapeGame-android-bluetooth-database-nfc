@@ -15,6 +15,7 @@ import fr.mastersid.pic2.escapegame.viewModel.NfcViewModel
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
+//TODO Add Fetch and Fuse buttons and send enigma code to next view
 @AndroidEntryPoint
 class NfcFragment : Fragment() {
     private lateinit var _binding: FragmentNfcBinding
@@ -32,7 +33,7 @@ class NfcFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args : NfcFragmentArgs by navArgs()
+        val args: NfcFragmentArgs by navArgs()
         val nfcViewModel: NfcViewModel by viewModels()
 
         nfcViewModel.item.observe(this) { item ->

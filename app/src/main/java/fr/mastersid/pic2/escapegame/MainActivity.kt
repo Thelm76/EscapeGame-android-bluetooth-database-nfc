@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var nfcHandler: EGNFC
-    private lateinit var _binding : ActivityMainBinding
+    private lateinit var _binding: ActivityMainBinding
 
     private var pendingIntent: PendingIntent? = null
 
@@ -64,16 +64,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
 
-
-    override fun onOptionsItemSelected(item:MenuItem):Boolean {
-        Log.d("test","---------------------------------------")
+    //TODO allow text to be different depending on the current view, and move to strings.xml
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("test", "---------------------------------------")
         val intent = Intent(this, PopUpWindow::class.java)
         intent.putExtra("popuptitle", "Error")
-        intent.putExtra("popuptext", "voici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\n")
+        intent.putExtra(
+            "popuptext",
+            "voici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\n"
+        )
         intent.putExtra("popupbtn", "OK")
         intent.putExtra("darkstatusbar", false)
         startActivity(intent)

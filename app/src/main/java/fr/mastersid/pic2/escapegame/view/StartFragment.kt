@@ -11,6 +11,7 @@ import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
+//TODO synchronize connected users to DB. If user already connected disable button
 class StartFragment : Fragment() {
     private lateinit var _binding: FragmentStartBinding
     override fun onCreateView(
@@ -23,22 +24,22 @@ class StartFragment : Fragment() {
     }
 
 
-    override fun onViewCreated (view : View, savedInstanceState : Bundle?) {
-        super.onViewCreated (view , savedInstanceState )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         _binding.button1.setOnClickListener {
-            val playerNumber= 1
+            val playerNumber = 1
             val action = StartFragmentDirections.actionStartFragmentToLobyFragment(playerNumber)
             findNavController().navigate(action)
         }
 
         _binding.button2.setOnClickListener {
-            val playerNumber= 2
+            val playerNumber = 2
             val action = StartFragmentDirections.actionStartFragmentToLobyFragment(playerNumber)
             findNavController().navigate(action)
         }
 
         _binding.button3.setOnClickListener {
-            val playerNumber= 3
+            val playerNumber = 3
             val action = StartFragmentDirections.actionStartFragmentToLobyFragment(playerNumber)
             findNavController().navigate(action)
         }

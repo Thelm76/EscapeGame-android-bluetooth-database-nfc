@@ -24,19 +24,19 @@ import javax.inject.Inject
 const val MESSAGE_READ: Int = 0
 const val MESSAGE_WRITE: Int = 1
 const val MESSAGE_TOAST: Int = 2
-const val MESSAGE_REQ_MAC=3
+const val MESSAGE_REQ_MAC: Int = 3
 // ... (Add other message types here as needed.)
 
 class EGBluetooth @Inject constructor(
     @ApplicationContext appContext: Context
-){
+) {
     val MY_UUID: UUID = UUID.fromString("8989063a-c9af-463a-b3f1-f21d9b2b827b")
     val TAG = "EG_BT"
 
     lateinit var manage: ConnectedThread
 
     private val _bluetoothAdapter: BluetoothAdapter? =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             appContext.getSystemService(BluetoothManager::class.java).adapter
         } else {
             @Suppress("DEPRECATION")
@@ -85,7 +85,7 @@ class EGBluetooth @Inject constructor(
     fun writeTo(mac: String, message: String) {
         val device = _bluetoothAdapter?.getRemoteDevice(mac)
 
-        if (device!=null) {
+        if (device != null) {
             Log.d(TAG, "Device created : ${device.name}")
             GlobalScope.launch {
                 ConnectThread(device).run()
