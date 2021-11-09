@@ -36,7 +36,7 @@ class ItemsFragment : Fragment() {
         val itemsViewModel: ItemsViewModel by viewModels()
 
         itemsViewModel.itemNFC.observe(this){ item ->
-            itemsViewModel.updateDesc()
+            itemsViewModel.updateItem()
             try {
                 _binding.imageviewItem.setImageDrawable(
                     getDrawable(

@@ -16,43 +16,12 @@ import javax.inject.Singleton
 const val TAG3 : String="FirebaseRepository"
 
 class EGFirebase{
-    private val database =FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
+    val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
-    private val usersReference = database.getReference("users")
-
-
-    private val _usersItems: MutableStateFlow<List<UsersItem>> = MutableStateFlow(emptyList())
-    val usersItems get ()= _usersItems
-
-    init {
-
-        try {
-            usersReference
-                .orderByChild("_rank")
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        usersItems.value = snapshot.children.map { dataSnapshot ->
-                            dataSnapshot.getValue(UsersItem::class.java)!!
-                        }
-
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        Log.w(ContentValues.TAG, "loadPost:onCancelled", error.toException())
-                    }
-                })
-
-        }
-        catch (e : Exception){
-            Log.e("erreur",e.stackTraceToString())
-
-
-        }
-    }
-
-    suspend fun writeUser(userId: String, connected: Int) {
+    /*suspend fun writeUser(userId: String, connected: Int) {
         val user = UsersItem(userId, connected)
-        usersReference.child(userId).setValue(user)
+        database.getReference("users")
+            .child(userId).setValue(user)
             .addOnSuccessListener {
                 // Write was successful!
                 Log.d(TAG3, "Write user "+user.uid + " connected " + user.connected)
@@ -61,35 +30,27 @@ class EGFirebase{
                 // Write failed
                 Log.w(ContentValues.TAG, "Writer Listener Failed")
             }
+    }*/
+
+    fun addDBListener(db: String, listener: ValueEventListener) {
+        try {
+            database.getReference(db)
+                .orderByChild("_rank")
+                .addValueEventListener(listener)
+        }
+        catch (e : Exception){
+            Log.e("erreur",e.stackTraceToString())
+        }
     }
 
+    inline fun <reified dataType> fetchFrom(db: String, child:String, callback: FirebaseCallback<dataType>) {
+        var tItem: dataType?
 
-    fun fetchUser(liveData: MutableLiveData<UsersItem>, childUser:String) {
-        usersReference.child(childUser).addValueEventListener(
-        object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                liveData.value= dataSnapshot.getValue<UsersItem>()
-                Log.d(
-                    TAG3, "child is "+childUser +" et id "+liveData.value!!.uid
-                        + " with connected "+ liveData.value!!.connected)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.w(ContentValues.TAG, "loadUsers:onCancelled", error.toException())
-            }
-
-        })
-    }
-
-    fun fetchItem(childItem:String, callback: FirebaseCallback) {
-
-        var itemItem : ItemItem? = null
-
-        database.getReference("items").child(childItem).addListenerForSingleValueEvent(
+        database.getReference(db).child(child).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    itemItem = dataSnapshot.getValue<ItemItem>()
-                    callback.onCallback(itemItem!!)
+                    tItem = dataSnapshot.getValue<dataType>()
+                    callback.onCallback(tItem!!)
                 }
 
                 override fun onCancelled(error: DatabaseError) {

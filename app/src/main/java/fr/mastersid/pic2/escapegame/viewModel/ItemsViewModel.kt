@@ -19,8 +19,7 @@ class ItemsViewModel @Inject constructor(
     private val _itemDesc: LiveData<String> = firebaseRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
-    fun updateDesc() {
-        firebaseRepository.fetchItemDesc(_itemNFC.value.toString())
-        Log.d("ItemDesc", "Desc updated: "+itemDesc.value)
+    fun updateItem() {
+        firebaseRepository.fetchItem(_itemNFC.value.toString())
     }
 }
