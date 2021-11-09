@@ -3,28 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentStart">
+    app:startDestination="@id/startFragment">
     <fragment
-        android:id="@+id/fragmentStart"
+        android:id="@+id/startFragment"
         android:name="fr.mastersid.pic2.escapegame.view.StartFragment"
-        android:label="FragmentStart"
+        android:label="StartFragment"
         tools:layout="@layout/fragment_start">
         <action
-            android:id="@+id/action_fragmentStart_to_fragmentLoby"
-            app:destination="@id/fragmentLoby" />
+            android:id="@+id/action_startFragment_to_lobyFragment"
+            app:destination="@id/lobyFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/fragmentLoby"
+        android:id="@+id/lobyFragment"
         android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
-        android:label="FragmentLoby"
+        android:label="LobyFragment"
         tools:layout="@layout/fragment_loby">
+
+        <argument
+            android:name="playerNumber"
+            app:argType="integer" />
+
         <action
-            android:id="@+id/action_fragmentLoby_to_fragmentNfc"
-            app:destination="@id/fragmentNfc" />
+            android:id="@+id/action_lobyFragment_to_nfcFragment"
+            app:destination="@id/nfcFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/fragmentNfc"
-        android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
-        android:label="FragmentNfc"
-        tools:layout="@layout/fragment_items"/>
+        android:id="@+id/nfcFragment"
+        android:name="fr.mastersid.pic2.escapegame.view.NfcFragment"
+        android:label="NfcFragment"
+        tools:layout="@layout/fragment_nfc">
+        <argument
+            android:name="PlayerNumber"
+            app:argType="integer" />
+    </fragment>
+
+    <argument
+        android:name="playerNumber"
+        app:argType="integer" />
+
 </navigation>
