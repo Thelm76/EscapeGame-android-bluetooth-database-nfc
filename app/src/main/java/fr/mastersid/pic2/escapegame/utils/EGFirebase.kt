@@ -14,19 +14,8 @@ class EGFirebase{
 
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
-    /*suspend fun writeUser(userId: String, connected: Int) {
-        val user = UsersItem(userId, connected)
-        database.getReference("users")
-            .child(userId).setValue(user)
-            .addOnSuccessListener {
-                // Write was successful!
-                Log.d(TAG3, "Write user "+user.uid + " connected " + user.connected)
-            }
-            .addOnFailureListener {
-                // Write failed
-                Log.w(ContentValues.TAG, "Writer Listener Failed")
-            }
-    }*/
+    private val _usersItems: MutableStateFlow<List<UsersItem>> = MutableStateFlow(emptyList())
+    val usersItems get ()= _usersItems
 
     fun addDBListener(db: DB, listener: ValueEventListener) {
         try {
@@ -63,7 +52,7 @@ class EGFirebase{
 
     data class UsersItem(
         var uid: String="",
-        var connected: Int=0
+        var connected: Boolean=false
     )
 
     data class ItemItem(
