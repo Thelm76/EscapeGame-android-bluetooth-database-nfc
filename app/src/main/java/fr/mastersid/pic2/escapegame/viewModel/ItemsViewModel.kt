@@ -1,6 +1,5 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -20,7 +19,7 @@ class ItemsViewModel @Inject constructor(
     val itemDesc get() = _itemDesc
 
 
-    protected val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
+    private val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
     val randomEnigma get() = _randomEnigma
 
     fun updateRandomEnigma(){

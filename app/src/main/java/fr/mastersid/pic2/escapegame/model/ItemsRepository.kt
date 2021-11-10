@@ -1,7 +1,8 @@
 package fr.mastersid.pic2.escapegame.model
 
-import android.util.Log
-import fr.mastersid.pic2.escapegame.utils.*
+import fr.mastersid.pic2.escapegame.utils.EGFirebase
+import fr.mastersid.pic2.escapegame.utils.EGNFC
+import fr.mastersid.pic2.escapegame.utils.FirebaseCallback
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
@@ -17,11 +18,11 @@ class ItemsRepository @Inject constructor(
     private val _itemDesc: MutableStateFlow<String> = MutableStateFlow("")
     val itemDesc get ()= _itemDesc
 
-    private var _random_enigma: MutableStateFlow<Int> = MutableStateFlow(-1)
-    val randomEnigma get() = _random_enigma
+    private var _randomEnigma: MutableStateFlow<Int> = MutableStateFlow(-1)
+    val randomEnigma get() = _randomEnigma
 
     fun randomizeEnigma(){
-        _random_enigma.value=((0..10).random())
+        _randomEnigma.value=((0..10).random())
     }
 
     fun fetchItem(itemName: String) {

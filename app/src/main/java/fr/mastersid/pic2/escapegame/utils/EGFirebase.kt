@@ -78,7 +78,8 @@ class EGFirebase{
     )
 
     data class EnigmaAnswer(
-        var aid: String="no answer"
+        var aid: String="no answer",
+        var valid: Boolean=false
     )
 }
 
