@@ -8,9 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 
-/**
- *Created by Bryan BARRE on 15/10/2021.
- */
 //TODO synchronize connected users to DB. If user already connected disable button
 class StartFragment : Fragment() {
     private lateinit var _binding: FragmentStartBinding

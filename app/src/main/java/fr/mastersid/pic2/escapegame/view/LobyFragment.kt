@@ -10,9 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 
-/**
- *Created by Bryan BARRE on 15/10/2021.
- */
 class LobyFragment : Fragment() {
     private lateinit var _binding: FragmentLobyBinding
     override fun onCreateView(
@@ -38,6 +35,7 @@ class LobyFragment : Fragment() {
         if (args.playerNumber == 2) {
             _binding.switch2.isChecked = true
             _binding.player2ProgressBar.isVisible = false
+            //TODO removed this when not needed anymore
             //////////////////////////////////////////////////for debug
             _binding.switch1.isChecked = true
             _binding.switch3.isChecked = true

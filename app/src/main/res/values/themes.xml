@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.EscapeGame" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#D32F2F</item>
-        <item name="colorPrimaryVariant">#500000</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Status bar color. -->

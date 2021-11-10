@@ -35,12 +35,26 @@
         android:label="NfcFragment"
         tools:layout="@layout/fragment_nfc">
         <argument
-            android:name="PlayerNumber"
+            android:name="playerNumber"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_nfcFragment_to_enigmaFragment"
+            app:destination="@id/enigmaFragment" />
     </fragment>
 
-    <argument
-        android:name="playerNumber"
-        app:argType="integer" />
+
+    <fragment
+        android:id="@+id/enigmaFragment"
+        android:name="fr.mastersid.pic2.escapegame.view.EnigmaFragment"
+        android:label="EnigmaFragment"
+        tools:layout="@layout/fragment_enigma">
+
+        <argument
+            android:name="enigma"
+            app:argType="integer"/>
+    </fragment>
+
+
+
 
 </navigation>
