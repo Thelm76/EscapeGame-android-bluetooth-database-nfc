@@ -14,9 +14,6 @@ class EGFirebase{
 
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
-    private val _usersItems: MutableStateFlow<List<UsersItem>> = MutableStateFlow(emptyList())
-    val usersItems get ()= _usersItems
-
     fun addDBListener(db: DB, listener: ValueEventListener) {
         try {
             database.getReference(db.dbName)
@@ -35,7 +32,7 @@ class EGFirebase{
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     tItem = dataSnapshot.getValue<dataType>()
-                    callback.onCallback(tItem!!)
+                    tItem?.let { callback.onCallback(it) }
                 }
 
                 override fun onCancelled(error: DatabaseError) {

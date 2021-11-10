@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
 import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
@@ -37,33 +37,17 @@ class ItemsFragment : Fragment() {
 
         itemsViewModel.itemNFC.observe(this){ item ->
             itemsViewModel.updateItem()
-            try {
-                _binding.imageviewItem.setImageDrawable(
-                    getDrawable(
-                        this.requireContext(),
-                        resources.getIdentifier(item, "drawable", context?.packageName)
-                    )
-                )
-            } catch (e: Exception) {
-                _binding.imageviewItem.setImageDrawable(
-                    getDrawable(
-                        this.requireContext(),
-                        resources.getIdentifier("no_item", "drawable", context?.packageName)
-                    )
-                )
-            }
         }
 
 
         itemsViewModel.itemDesc.observe(this){ desc ->
             _binding.itemName.text=desc
         }
+
+        itemsViewModel.itemImg.observe(this){img ->
+            img?.let {
+                Glide.with(this).load(it).into(_binding.imageviewItem)
+            }
+        }
     }
-
 }
-
-
-
-
-
-

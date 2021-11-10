@@ -1,6 +1,5 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -10,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemsViewModel @Inject constructor(
-    private val itemsRepository: ItemsRepository,
+    itemsRepository: ItemsRepository,
     private val firebaseRepository: ItemsRepository
 ): ViewModel() {
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
@@ -19,7 +18,11 @@ class ItemsViewModel @Inject constructor(
     private val _itemDesc: LiveData<String> = firebaseRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
+    private val _itemImg: LiveData<ByteArray?> = firebaseRepository.itemImg.asLiveData()
+    val itemImg get() = _itemImg
+
     fun updateItem() {
-        firebaseRepository.fetchItem(_itemNFC.value.toString())
+        if (_itemNFC.value.toString().isNotEmpty())
+            firebaseRepository.fetchItem(_itemNFC.value.toString())
     }
 }
