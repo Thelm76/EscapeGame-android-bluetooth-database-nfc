@@ -14,6 +14,10 @@ class EGFirebase{
 
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
+
+    fun writeAttribute( db : DB, child: String, attribute : String, value : Any){
+        database.getReference((db.dbName)).child(child).child(attribute).setValue(value)
+    }
     /*suspend fun writeUser(userId: String, connected: Int) {
         val user = UsersItem(userId, connected)
         database.getReference("users")
@@ -63,7 +67,7 @@ class EGFirebase{
 
     data class UsersItem(
         var uid: String="",
-        var connected: Int=0
+        var connected: Boolean = false
     )
 
     data class ItemItem(
