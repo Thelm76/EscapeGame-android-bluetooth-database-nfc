@@ -11,32 +11,31 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
-import fr.mastersid.pic2.escapegame.databinding.FragmentNfcBinding
-import fr.mastersid.pic2.escapegame.viewModel.NfcViewModel
+import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
+import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 
 //TODO Add Fetch and Fuse buttons and send enigma code to next view
 @AndroidEntryPoint
-class NfcFragment : Fragment() {
-    private lateinit var _binding: FragmentNfcBinding
+class ItemsFragment : Fragment() {
+    private lateinit var _binding: FragmentItemsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNfcBinding.inflate(inflater)
+        _binding = FragmentItemsBinding.inflate(inflater)
         return _binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val args: ItemsFragmentArgs by navArgs()
+        val itemsViewModel: ItemsViewModel by viewModels()
 
-        val args: NfcFragmentArgs by navArgs()
-        val nfcViewModel: NfcViewModel by viewModels()
-        var enigma=0
-
-        nfcViewModel.item.observe(this) { item ->
+        itemsViewModel.itemNFC.observe(this){ item ->
+            itemsViewModel.updateItem()
             try {
                 _binding.imageviewItem.setImageDrawable(
                     getDrawable(
@@ -60,6 +59,12 @@ class NfcFragment : Fragment() {
             _binding.buttonSuivant.isClickable = true
             _binding.buttonSuivant.isEnabled = true
         }
+
+
+        itemsViewModel.itemDesc.observe(this){ desc ->
+            _binding.itemName.text=desc
+        }
+    }
 
         _binding.buttonSuivant.setOnClickListener{
             val action = NfcFragmentDirections.actionNfcFragmentToEnigmaFragment(enigma)

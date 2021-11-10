@@ -5,6 +5,8 @@ import android.content.Intent
 import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.FirebaseDatabase
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
