@@ -50,7 +50,7 @@ class EGFirebase{
         }
     }
 
-    suspend fun writeUser(userId: String, connected: Int) {
+    suspend fun writeUser(userId: String, connected: Boolean) {
         val user = UsersItem(userId, connected)
         usersReference.child(userId).setValue(user)
             .addOnSuccessListener {
@@ -102,7 +102,7 @@ class EGFirebase{
 
 data class UsersItem(
     var uid: String="",
-    var connected: Int=0
+    var connected: Boolean=false
 )
 
 data class ItemItem(
