@@ -19,6 +19,14 @@ class ItemsViewModel @Inject constructor(
     private val _itemDesc: LiveData<String> = firebaseRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
+
+    protected val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
+    val randomEnigma get() = _randomEnigma
+
+    fun updateRandomEnigma(){
+        itemsRepository.randomizeEnigma()
+    }
+
     fun updateItem() {
         firebaseRepository.fetchItem(_itemNFC.value.toString())
     }

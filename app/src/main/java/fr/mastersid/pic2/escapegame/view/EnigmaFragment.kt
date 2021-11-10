@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import fr.mastersid.pic2.escapegame.databinding.FragmentEnigmaBinding
-import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 
 class EnigmaFragment : Fragment() {
     private lateinit var _binding: FragmentEnigmaBinding
@@ -25,7 +24,7 @@ class EnigmaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args:EnigmaFragmentArgs by navArgs()
-        Toast.makeText(context,"get ready for enigme number "+args.enigma,5).show()
+        Toast.makeText(context,"get ready for enigma number "+args.enigma,5).show()
         //TODO db and args
 
 

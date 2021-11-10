@@ -22,6 +22,7 @@ class EGNFC @Inject constructor(
     // Pending intent for NFC intent foreground dispatch.
     // Used to read all NDEF tags while the app is running in the foreground.
 
+
     private val TAG = "EGNFC"
 
     private var _nfcAdapter: NfcAdapter? = null
@@ -31,12 +32,14 @@ class EGNFC @Inject constructor(
     private val _lastScan = MutableStateFlow("")
     val lastScan get() = _lastScan
 
+
     init {
         // Check if NFC is supported and enabled
         _nfcAdapter = NfcAdapter.getDefaultAdapter(appcontext)
         Log.d(TAG, "NFC supported : " + (_nfcAdapter != null).toString())
         Log.d(TAG, "NFC enabled : " + (_nfcAdapter?.isEnabled).toString())
     }
+
 
 
     fun processIntent(intent: Intent) {

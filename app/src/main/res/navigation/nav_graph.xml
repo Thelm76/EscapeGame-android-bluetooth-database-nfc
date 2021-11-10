@@ -32,8 +32,8 @@
     <fragment
         android:id="@+id/nfcFragment"
         android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
-        android:label="NfcFragment"
-        tools:layout="@layout/fragment_nfc">
+        android:label="ItemFragment"
+        tools:layout="@layout/fragment_items">
         <argument
             android:name="playerNumber"
             app:argType="integer" />

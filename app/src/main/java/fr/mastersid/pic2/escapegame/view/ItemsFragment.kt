@@ -53,22 +53,26 @@ class ItemsFragment : Fragment() {
             }
         }
 
+
         _binding.buttonFusion.setOnClickListener{
-            enigma=1
-            Toast.makeText(context,"la question sera "+enigma,5)
             _binding.buttonSuivant.isClickable = true
             _binding.buttonSuivant.isEnabled = true
         }
-
+        _binding.buttonSuivant.setOnClickListener{
+            itemsViewModel.updateRandomEnigma()
+        }
 
         itemsViewModel.itemDesc.observe(this){ desc ->
             _binding.itemName.text=desc
         }
-    }
 
-        _binding.buttonSuivant.setOnClickListener{
-            val action = NfcFragmentDirections.actionNfcFragmentToEnigmaFragment(enigma)
-            findNavController().navigate(action)
+        itemsViewModel.randomEnigma.observe(this){ value->
+            //Toast.makeText(context,"la question sera $value",5).show()
+
+            if (value!=-1) {
+                val action = ItemsFragmentDirections.actionNfcFragmentToEnigmaFragment(value)
+                findNavController().navigate(action)
+            }
         }
     }
 }
