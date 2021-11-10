@@ -10,16 +10,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemsViewModel @Inject constructor(
-    private val itemsRepository: ItemsRepository,
-    private val firebaseRepository: ItemsRepository
-): ViewModel() {
+    private val itemsRepository: ItemsRepository
+    ): ViewModel() {
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
     val itemNFC get() = _itemNFC
 
-    private val _itemDesc: LiveData<String> = firebaseRepository.itemDesc.asLiveData()
+    private val _itemDesc: LiveData<String> = itemsRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
     fun updateItem() {
-        firebaseRepository.fetchItem(_itemNFC.value.toString())
+        itemsRepository.fetchItem(_itemNFC.value.toString())
     }
 }

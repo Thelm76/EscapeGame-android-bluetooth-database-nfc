@@ -6,28 +6,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.navArgs
-import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
+import fr.mastersid.pic2.escapegame.R
+import fr.mastersid.pic2.escapegame.databinding.FragmentLobbyBinding
+import fr.mastersid.pic2.escapegame.viewModel.LobbyViewModel
 
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
-class LobyFragment : Fragment() {
-    private lateinit var _binding: FragmentLobyBinding
+class LobbyFragment : Fragment() {
+    private lateinit var _binding: FragmentLobbyBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentLobyBinding.inflate(inflater)
+        _binding = FragmentLobbyBinding.inflate(inflater)
         return _binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val args: LobyFragmentArgs by navArgs()
+        val lobbyViewModel: LobbyViewModel by hiltNavGraphViewModels(R.id.nav_graph)
+        val args: LobbyFragmentArgs by navArgs()
+
+        lobbyViewModel
 
         //TODO get connected players from DB & allow continuing party if everyone is connected
         //TODO lower priority, initialize bluetooth connection and share BT MAC adresses
@@ -53,11 +59,15 @@ class LobyFragment : Fragment() {
             _binding.playButton.isEnabled = true
         }
 
-        _binding.playButton.setOnClickListener {
+        /*_binding.playButton.setOnClickListener {
             val playerNumbers = args.playerNumber
             val action = LobyFragmentDirections.actionLobyFragmentToNfcFragment(playerNumbers)
             findNavController().navigate(action)
-        }
+        }*/
+        /*_binding.playButton.setOnClickListener(){
+
+            Log.d("Hello", lobyModel.getMacAddress())
+        }*/
 
     }
 }
