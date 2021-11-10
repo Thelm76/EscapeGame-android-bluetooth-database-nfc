@@ -49,7 +49,7 @@ class EGFirebase{
 
         }
     }
-
+/*
     suspend fun writeUser(userId: String, connected: Int) {
         val user = UsersItem(userId, connected)
         usersReference.child(userId).setValue(user)
@@ -62,7 +62,7 @@ class EGFirebase{
                 Log.w(ContentValues.TAG, "Writer Listener Failed")
             }
     }
-
+*/
 
     fun fetchUser(liveData: MutableLiveData<UsersItem>, childUser:String) {
         usersReference.child(childUser).addValueEventListener(
@@ -102,7 +102,7 @@ class EGFirebase{
 
 data class UsersItem(
     var uid: String="",
-    var connected: Int=0
+    var connected: Boolean=false
 )
 
 data class ItemItem(
