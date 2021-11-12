@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -36,6 +37,7 @@ class LobbyFragment : Fragment() {
         val args: LobbyFragmentArgs by navArgs()
 
 
+
         lobbyViewModel.connected.observe(this) { value ->
             //TODO get connected players from DB & allow continuing party if everyone is connected
             //TODO lower priority, initialize bluetooth connection and share BT MAC adresses
@@ -62,5 +64,14 @@ class LobbyFragment : Fragment() {
             val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumbers)
             findNavController().navigate(action)
         }
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val playerNumbers = args.playerNumber
+                val action =  LobbyFragmentDirections.actionLobbyFragmentToStartFragment(playerNumbers)
+                    lobbyViewModel.setDisconnected(playerNumbers)
+                findNavController().navigate(action)
+
+            }
+        })
     }
 }
