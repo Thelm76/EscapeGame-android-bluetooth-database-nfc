@@ -10,14 +10,14 @@
         android:label="StartFragment"
         tools:layout="@layout/fragment_start">
         <action
-            android:id="@+id/action_startFragment_to_lobyFragment"
-            app:destination="@id/lobyFragment" />
+            android:id="@+id/action_startFragment_to_lobbyFragment"
+            app:destination="@id/lobbyFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/lobyFragment"
+        android:id="@+id/lobbyFragment"
         android:name="fr.mastersid.pic2.escapegame.view.LobbyFragment"
-        android:label="LobyFragment"
+        android:label="LobbyFragment"
         tools:layout="@layout/fragment_lobby">
 
         <argument
@@ -25,22 +25,17 @@
             app:argType="integer" />
 
         <action
-            android:id="@+id/action_lobyFragment_to_nfcFragment"
-            app:destination="@id/nfcFragment" />
+            android:id="@+id/action_lobbyFragment_to_itemsFragment"
+            app:destination="@id/itemsFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/nfcFragment"
+        android:id="@+id/itemsFragment"
         android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
-        android:label="NfcFragment"
+        android:label="ItemsFragment"
         tools:layout="@layout/fragment_items">
         <argument
-            android:name="PlayerNumber"
+            android:name="playerNumber"
             app:argType="integer" />
     </fragment>
-
-    <argument
-        android:name="playerNumber"
-        app:argType="integer" />
-
 </navigation>
