@@ -15,11 +15,9 @@ class EnigmaRepository @Inject constructor(
     val enigma get() = _enigma
 
     fun fetchEnigma(enigmaName: String) {
-        Log.d("-**-",enigmaName)
         escapeGameFirebase.fetchFrom(EGFirebase.DB.ENIGMAS, enigmaName, object:
             FirebaseCallback<EGFirebase.EnigmaItem> {
             override fun onCallback(value: EGFirebase.EnigmaItem) {
-                Log.d("qsdf","-*-*-*")
                 _enigma.value = value
             }
         })

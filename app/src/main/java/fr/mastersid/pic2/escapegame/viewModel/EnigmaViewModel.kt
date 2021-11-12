@@ -17,7 +17,6 @@ class EnigmaViewModel @Inject constructor(
     val enigma get() = _enigma
 
     fun updateEnigma(enigma: Int) {
-        Log.d("-*-*-*-*-*-*-","88888888888")
         enigmaRepository.fetchEnigma("question$enigma")
     }
 }

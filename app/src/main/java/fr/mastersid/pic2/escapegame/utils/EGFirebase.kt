@@ -41,15 +41,10 @@ class EGFirebase{
 
     inline fun <reified dataType> fetchFrom(db: DB, child:String, callback: FirebaseCallback<dataType>) {
         var tItem: dataType?
-        Log.d(TAG, "yop'")
         database.getReference(db.dbName).child(child).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    Log.d(TAG, "yousk2")
-
                     tItem = dataSnapshot.getValue<dataType>()
-                    Log.d(TAG, "yousk3")
-
                     callback.onCallback(tItem!!)
                 }
 

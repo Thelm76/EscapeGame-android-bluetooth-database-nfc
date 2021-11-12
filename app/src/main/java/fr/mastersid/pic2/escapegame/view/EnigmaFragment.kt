@@ -42,8 +42,5 @@ class EnigmaFragment : Fragment() {
 
         }
 
-        _binding.question.setOnClickListener{
-
-        }
     }
 }

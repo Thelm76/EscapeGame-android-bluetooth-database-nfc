@@ -27,8 +27,6 @@ class ItemsRepository @Inject constructor(
     }
 
     fun fetchItem(itemName: String) {
-        Log.d("-**-",itemName)
-
         escapeGameFirebase.fetchFrom(EGFirebase.DB.ITEMS, itemName, object:
             FirebaseCallback<EGFirebase.ItemItem> {
             override fun onCallback(value: EGFirebase.ItemItem) {
