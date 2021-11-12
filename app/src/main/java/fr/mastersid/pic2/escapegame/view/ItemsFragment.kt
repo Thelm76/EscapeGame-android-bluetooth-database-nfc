@@ -8,7 +8,6 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
 import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 

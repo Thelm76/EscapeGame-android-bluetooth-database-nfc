@@ -18,19 +18,6 @@ class EGFirebase{
     fun writeAttribute( db : DB, child: String, attribute : String, value : Any){
         database.getReference((db.dbName)).child(child).child(attribute).setValue(value)
     }
-    /*suspend fun writeUser(userId: String, connected: Int) {
-        val user = UsersItem(userId, connected)
-        database.getReference("users")
-            .child(userId).setValue(user)
-            .addOnSuccessListener {
-                // Write was successful!
-                Log.d(TAG3, "Write user "+user.uid + " connected " + user.connected)
-            }
-            .addOnFailureListener {
-                // Write failed
-                Log.w(ContentValues.TAG, "Writer Listener Failed")
-            }
-    }*/
 
     fun addDBListener(db: DB, listener: ValueEventListener) {
         try {

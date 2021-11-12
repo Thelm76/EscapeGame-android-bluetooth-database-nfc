@@ -218,9 +218,6 @@ class EGBluetooth @Inject constructor(
                     MESSAGE_READ, numBytes, -1, btBuffer
                 )
 
-                val s = String(readMsg.obj as ByteArray, 0, numBytes)
-                Log.d(TAG, "read : " + s)
-
                 readMsg.sendToTarget()
             }
         }
