@@ -12,6 +12,8 @@
         <action
             android:id="@+id/action_startFragment_to_lobbyFragment"
             app:destination="@id/lobbyFragment" />
+        <argument android:name="playerNumber"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -27,6 +29,9 @@
         <action
             android:id="@+id/action_lobbyFragment_to_itemsFragment"
             app:destination="@id/itemsFragment" />
+        <action
+            android:id="@+id/action_lobbyFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
 
     <fragment

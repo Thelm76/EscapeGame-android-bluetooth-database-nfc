@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,6 +35,7 @@ class LobbyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val lobbyViewModel: LobbyViewModel by hiltNavGraphViewModels(R.id.nav_graph)
         val args: LobbyFragmentArgs by navArgs()
+
 
 
         lobbyViewModel.connected.observe(this) { value ->
@@ -67,5 +69,14 @@ class LobbyFragment : Fragment() {
             val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumber)
             findNavController().navigate(action)
         }
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val playerNumbers = args.playerNumber
+                val action =  LobbyFragmentDirections.actionLobbyFragmentToStartFragment(playerNumbers)
+                    lobbyViewModel.setDisconnected(playerNumbers)
+                findNavController().navigate(action)
+
+            }
+        })
     }
 }
