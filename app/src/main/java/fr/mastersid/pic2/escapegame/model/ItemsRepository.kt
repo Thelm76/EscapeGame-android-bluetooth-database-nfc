@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class ItemsRepository @Inject constructor(
     private val escapeGameFirebase: EGFirebase,
-    private val escapeGameNfc: EGNFC,
+    escapeGameNfc: EGNFC,
     private val escapeGameBluetooth : EGBluetooth
     ) {
 
@@ -23,4 +23,7 @@ class ItemsRepository @Inject constructor(
             }
         })
     }
+
+
+
 }

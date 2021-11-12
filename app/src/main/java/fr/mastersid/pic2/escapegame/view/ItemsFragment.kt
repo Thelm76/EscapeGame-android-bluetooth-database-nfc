@@ -16,7 +16,6 @@ import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
  *Created by Bryan BARRE on 15/10/2021.
  */
 //TODO Add Fetch and Fuse buttons and send enigma code to next view
-@AndroidEntryPoint
 class ItemsFragment : Fragment() {
     private lateinit var _binding: FragmentItemsBinding
 
