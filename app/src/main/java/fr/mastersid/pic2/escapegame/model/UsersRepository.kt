@@ -8,7 +8,6 @@ import com.google.firebase.database.ValueEventListener
 import fr.mastersid.pic2.escapegame.utils.EGFirebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.forEach
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(

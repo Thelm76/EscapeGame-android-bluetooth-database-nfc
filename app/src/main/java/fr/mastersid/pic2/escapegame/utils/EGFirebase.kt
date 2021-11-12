@@ -54,14 +54,14 @@ class EGFirebase{
 
     data class UsersItem(
         var uid: String="",
-        var connected: Boolean=false
+        var connected: Boolean = false
     )
 
-data class ItemItem(
-    var id: String="",
-    var img: String="",
-    var desc: String="empty desc"
-)
+    data class ItemItem(
+        var id: String="no item",
+        var img: String="",
+        var desc: String="empty desc"
+    )
 
     data class EnigmaItem(
         var qid: String="no question",
