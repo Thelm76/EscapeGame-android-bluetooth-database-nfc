@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -40,7 +41,36 @@ class EnigmaFragment : Fragment() {
             _binding.btnAnswer3.text = enigma.answers.aid3
             _binding.btnAnswer4.text = enigma.answers.aid4
 
+            _binding.btnAnswer1.setOnClickListener{
+                if (enigma.answer =="aid1"){
+                    Toast.makeText(context,"gg",10).show()
+                    _binding.imageView6.isVisible=true
+                }
+            }
+            _binding.btnAnswer2.setOnClickListener{
+                if (enigma.answer=="aid2"){
+                    Toast.makeText(context,"gg",10).show()
+                    _binding.imageView6.isVisible=true
+
+                }
+            }
+            _binding.btnAnswer3.setOnClickListener{
+                if (enigma.answer =="aid3"){
+                    Toast.makeText(context,"gg",10).show()
+                    _binding.imageView6.isVisible=true
+
+                }
+            }
+            _binding.btnAnswer4.setOnClickListener{
+                if (enigma.answer =="aid4"){
+                    Toast.makeText(context,"gg",10).show()
+                    _binding.imageView6.isVisible=true
+
+                }
+            }
         }
+
+
 
     }
 }
