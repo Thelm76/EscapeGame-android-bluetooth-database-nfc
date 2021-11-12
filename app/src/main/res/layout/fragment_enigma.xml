@@ -24,7 +24,7 @@
             app:cardPreventCornerOverlap="false">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="25dp"
@@ -48,13 +48,13 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/btn_answer1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/btn_answer3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Button" />
@@ -68,13 +68,13 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_answer2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Button" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/btn_answer4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Button" />

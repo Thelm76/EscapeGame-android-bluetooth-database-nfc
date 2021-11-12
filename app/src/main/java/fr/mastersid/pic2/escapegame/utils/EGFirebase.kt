@@ -41,11 +41,15 @@ class EGFirebase{
 
     inline fun <reified dataType> fetchFrom(db: DB, child:String, callback: FirebaseCallback<dataType>) {
         var tItem: dataType?
-
+        Log.d(TAG, "yop'")
         database.getReference(db.dbName).child(child).addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    Log.d(TAG, "yousk2")
+
                     tItem = dataSnapshot.getValue<dataType>()
+                    Log.d(TAG, "yousk3")
+
                     callback.onCallback(tItem!!)
                 }
 
@@ -58,7 +62,7 @@ class EGFirebase{
     enum class DB(val dbName:String) {
         USERS("users"),
         ITEMS("items"),
-        ENIGMAS("enigmas")
+        ENIGMAS("enigma")
     }
 
     data class UsersItem(
@@ -73,13 +77,17 @@ class EGFirebase{
     )
 
     data class EnigmaItem(
-        var qid: String="no question",
-        var answer: List<EnigmaAnswer>
+        var answer: String="aid1",
+        var answers: EnigmaAnswers=EnigmaAnswers(),
+        var qid: String = "question0",
+        var question: String="no question"
     )
 
-    data class EnigmaAnswer(
-        var aid: String="no answer",
-        var valid: Boolean=false
+    data class EnigmaAnswers(
+        var aid1: String="",
+        var aid2: String="",
+        var aid3: String="",
+        var aid4: String=""
     )
 }
 

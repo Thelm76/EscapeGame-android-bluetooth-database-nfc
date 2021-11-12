@@ -1,5 +1,6 @@
 package fr.mastersid.pic2.escapegame.model
 
+import android.util.Log
 import fr.mastersid.pic2.escapegame.utils.EGFirebase
 import fr.mastersid.pic2.escapegame.utils.EGNFC
 import fr.mastersid.pic2.escapegame.utils.FirebaseCallback
@@ -22,11 +23,14 @@ class ItemsRepository @Inject constructor(
     val randomEnigma get() = _randomEnigma
 
     fun randomizeEnigma(){
-        _randomEnigma.value=((0..10).random())
+        _randomEnigma.value=((1..6).random())
     }
 
     fun fetchItem(itemName: String) {
-        escapeGameFirebase.fetchFrom(EGFirebase.DB.ITEMS, itemName, object: FirebaseCallback<EGFirebase.ItemItem> {
+        Log.d("-**-",itemName)
+
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.ITEMS, itemName, object:
+            FirebaseCallback<EGFirebase.ItemItem> {
             override fun onCallback(value: EGFirebase.ItemItem) {
                 _itemDesc.value = value.desc
             }

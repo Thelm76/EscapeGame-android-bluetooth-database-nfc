@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import fr.mastersid.pic2.escapegame.model.EnigmaRepository
 import fr.mastersid.pic2.escapegame.model.ItemsRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class ItemsViewModel @Inject constructor(
     private val itemsRepository: ItemsRepository,
-    private val firebaseRepository: ItemsRepository
-): ViewModel() {
+    //TODO cette ligne ma l'air bizarre
+    private val firebaseRepository: ItemsRepository,
+
+    ): ViewModel() {
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
     val itemNFC get() = _itemNFC
 
