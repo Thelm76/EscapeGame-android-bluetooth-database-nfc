@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
+import fr.mastersid.pic2.escapegame.view.ItemsFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,12 +41,6 @@ class MainActivity : AppCompatActivity() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             }
         )
-
-        if (intent != null) {
-            // Check if the app was started via an NDEF intent
-            //logMessage("Found intent in onCreate", intent.action.toString())
-            processIntent(intent)
-        }
     }
 
     override fun onResume() {
@@ -89,6 +85,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         return true//item.onNavDestinationSelected(findNavController(R.id.navHostFragment))
     }
-
-
 }

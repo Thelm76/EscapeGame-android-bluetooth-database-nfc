@@ -1,6 +1,5 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,6 +13,8 @@ class LobbyViewModel @Inject constructor(
     private val lobbyRepository: LobbyRepository,
     private val usersRepository: UsersRepository,
 ) : ViewModel() {
+    private val _usersConnected : LiveData<List<Boolean>> = usersRepository.usersConnected.asLiveData()
+    val usersConnected get() = _usersConnected
 
     fun MacAddress() : String{
         val Mac = lobbyRepository.getBluetoothMacAddress()
@@ -32,17 +33,14 @@ class LobbyViewModel @Inject constructor(
     }
 
     fun setDisconnected (user: Int){
-        usersRepository.setDisconnected(
+        usersRepository.setConnected(
             when (user) {
                 1-> "master"
                 2-> "player2"
                 3-> "player3"
                 else -> ""
-                        }
-            ,false)
+            },
+            false
+        )
     }
-    private val _connected : LiveData<List<Boolean>> = usersRepository.usersConnected.asLiveData()
-    val connected get() = _connected
-
-
 }

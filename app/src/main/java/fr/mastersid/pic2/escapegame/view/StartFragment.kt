@@ -1,7 +1,6 @@
 package fr.mastersid.pic2.escapegame.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 import fr.mastersid.pic2.escapegame.viewModel.StartViewModel
 
-/**
- *Created by Bryan BARRE on 15/10/2021.
- */
-//TODO synchronize connected users to DB. If user already connected disable button
 @AndroidEntryPoint
 class StartFragment : Fragment() {
     private lateinit var _binding: FragmentStartBinding
@@ -43,19 +38,24 @@ class StartFragment : Fragment() {
 
         }
 
+        //TODO: for debug purpose, please remove on final version
+        _binding.imageView.setOnLongClickListener{
+            startViewModel.setConnected(1,false)
+            startViewModel.setConnected(2,false)
+            startViewModel.setConnected(3,false)
+            true
+        }
+
         _binding.button1.setOnClickListener {
             val playerNumber = 1
-            startViewModel.setConnected(playerNumber)
+            startViewModel.setConnected(playerNumber,true)
             val action = StartFragmentDirections.actionStartFragmentToLobbyFragment(playerNumber)
             findNavController().navigate(action)
-
-
-
         }
 
         _binding.button2.setOnClickListener {
             val playerNumber = 2
-            startViewModel.setConnected(playerNumber)
+            startViewModel.setConnected(playerNumber,true)
 
             val action = StartFragmentDirections.actionStartFragmentToLobbyFragment(playerNumber)
             findNavController().navigate(action)
@@ -63,7 +63,7 @@ class StartFragment : Fragment() {
 
         _binding.button3.setOnClickListener {
             val playerNumber = 3
-            startViewModel.setConnected(playerNumber)
+            startViewModel.setConnected(playerNumber,true)
             val action = StartFragmentDirections.actionStartFragmentToLobbyFragment(playerNumber)
             findNavController().navigate(action)
         }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.navArgs
@@ -13,10 +14,6 @@ import fr.mastersid.pic2.escapegame.R
 import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
 import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 
-/**
- *Created by Bryan BARRE on 15/10/2021.
- */
-//TODO Add Fetch and Fuse buttons and send enigma code to next view
 class ItemsFragment : Fragment() {
     private lateinit var _binding: FragmentItemsBinding
 
@@ -37,32 +34,48 @@ class ItemsFragment : Fragment() {
 
         itemsViewModel.setPlayerNumber(args.playerNumber)
 
-        itemsViewModel.itemNFC.observe(this){ item ->
-            itemsViewModel.updateItem()
-        }
+        //Needed to permit repository flow update...
+        itemsViewModel.itemId.observe(this){}
 
-
-        itemsViewModel.itemDesc.observe(this){ desc ->
-            _binding.itemName.text=desc
-        }
-
-        itemsViewModel.message.observe(this){ value ->
-            when {
-                value=="fetch_item"-> itemsViewModel.itemNFC.value?.let { itemsViewModel.sendItem(it,1) }
-                value.startsWith("item:")-> Log.d("WEEEEE", value.substring(5))
-            }
-        }
-
-        _binding.buttonFusion.setOnClickListener(){
-            Log.d("hello","item fragment")
-            itemsViewModel.sendRequestItem()
-
-        }
-
-        itemsViewModel.itemImg.observe(this){img ->
-            img?.let {
+        itemsViewModel.item1.observe(this){ item ->
+            _binding.itemDesc.text=item.desc
+            item.img?.let {
                 Glide.with(this).load(it).into(_binding.imageviewItem)
+                Glide.with(this).load(it).into(_binding.imageviewItem1)
             }
+        }
+
+        itemsViewModel.item2.observe(this){ item ->
+            _binding.itemDesc.text=item.desc
+            item.img?.let {
+                Glide.with(this).load(it).into(_binding.imageviewItem2)
+            }
+        }
+
+        itemsViewModel.item3.observe(this){ item ->
+            item.img?.let {
+                Glide.with(this).load(it).into(_binding.imageviewItem3)
+            }
+        }
+
+        itemsViewModel.messageBT.observe(this){ value ->
+            when {
+                value=="fetch_item"-> {
+                    Log.d("ItemView", "fetch item detected, sending item ${itemsViewModel.itemId.value}")
+                    itemsViewModel.sendItemAs(itemsViewModel.itemId.value?:"",args.playerNumber)
+                }
+                value.startsWith("item2:") -> {
+                    itemsViewModel.updateItem(2, value.substring(6))
+                }
+                value.startsWith("item3:") -> {
+                    itemsViewModel.updateItem(3, value.substring(6))
+                }
+            }
+        }
+
+        _binding.buttonFusion.isVisible=(args.playerNumber==1)
+        _binding.buttonFusion.setOnClickListener{
+            itemsViewModel.sendRequestItem(2)
         }
     }
 }

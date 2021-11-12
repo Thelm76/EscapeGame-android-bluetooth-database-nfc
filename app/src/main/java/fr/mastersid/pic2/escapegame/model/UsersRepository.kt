@@ -37,11 +37,7 @@ class UsersRepository @Inject constructor(
         })
     }
 
-        fun setConnected (user: String, connected : Boolean){
-            escapeGameFirebase.writeAttribute(EGFirebase.DB.USERS, user, "connected", connected)
-        }
-
-        fun setDisconnected (user: String, connected : Boolean){
-            escapeGameFirebase.writeAttribute(EGFirebase.DB.USERS, user, "connected", connected)
-        }
+    fun setConnected (user: String, connected : Boolean){
+        escapeGameFirebase.writeAttribute(EGFirebase.DB.USERS, user, "connected", connected)
+    }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import fr.mastersid.pic2.escapegame.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 class ItemsRepository @Inject constructor(
@@ -12,51 +13,77 @@ class ItemsRepository @Inject constructor(
     private val escapeGameBluetooth : EGBluetooth
     )
 {
-    private val _message: MutableStateFlow<String> = escapeGameBluetooth.message
-    val message get() = _message
+    private val _item1: MutableStateFlow<Item> = MutableStateFlow(Item())
+    val item1 get ()= _item1
 
-    private val _lastScan: MutableStateFlow<String> = escapeGameNfc.lastScan
-    val lastScan get ()= _lastScan
+    private val _item2: MutableStateFlow<Item> = MutableStateFlow(Item())
+    val item2 get ()= _item2
 
-    private val _itemDesc: MutableStateFlow<String> = MutableStateFlow("")
-    val itemDesc get ()= _itemDesc
+    private val _item3: MutableStateFlow<Item> = MutableStateFlow(Item())
+    val item3 get ()= _item3
 
-    private val _itemImg: MutableStateFlow<ByteArray?> = MutableStateFlow(null)
-    val itemImg get ()= _itemImg
 
-    fun fetchItem(itemName: String) {
-        escapeGameFirebase.fetchFrom(EGFirebase.DB.ITEMS, itemName, object: FirebaseCallback<EGFirebase.ItemItem> {
-            override fun onCallback(value: EGFirebase.ItemItem) {
-                _itemDesc.value = value.desc
-                val storage = FirebaseStorage.getInstance()
-                val storageRef = storage.getReferenceFromUrl(value.img)
+    private val _messageBT: MutableStateFlow<String> = escapeGameBluetooth.message
+    val messageBT get() = _messageBT
 
-                storageRef.getBytes(Long.MAX_VALUE).addOnCompleteListener {
-                    _itemImg.value = it.result
+    private val _itemId: MutableStateFlow<String> = escapeGameNfc.lastScan
+    val itemId get ()= _itemId.onEach { value->
+        if (value.isNotBlank())
+        escapeGameFirebase.fetchFrom(
+            EGFirebase.DB.ITEMS,
+            value,
+            object: FirebaseCallback<EGFirebase.ItemItem> {
+                override fun onCallback(value: EGFirebase.ItemItem) {
+                    FirebaseStorage.getInstance()
+                        .getReferenceFromUrl(value.img)
+                        .getBytes(Long.MAX_VALUE).addOnCompleteListener{
+                            _item1.value = Item(value.id,value.desc,it.result)
+                        }
                 }
             }
-        })
+        )
     }
 
     fun sendRequestItem(user: String) {
         Log.d("hello","repository item")
         escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
             override fun onCallback(value: EGFirebase.UsersItem) {
-
                 escapeGameBluetooth.writeTo(value.mac, "fetch_item")
-
-                Log.d("hello", value.mac)
-                Log.d("hello","fetc item")
-                Log.d("hello","repository 2 item")
             }
         })
     }
 
-    fun sendItem(user: String, item: String){
-        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
+    fun respondItem(user: Int, item: String){
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, "master", object: FirebaseCallback<EGFirebase.UsersItem> {
             override fun onCallback(value: EGFirebase.UsersItem) {
-                escapeGameBluetooth.writeTo(value.mac, "item:$item")
+                escapeGameBluetooth.respond("item$user:$item")
             }
         })
     }
+
+    fun fetchItem(item: String, itemNb: Int) {
+        if (item.isNotBlank())
+            escapeGameFirebase.fetchFrom(
+                EGFirebase.DB.ITEMS,
+                item,
+                object: FirebaseCallback<EGFirebase.ItemItem> {
+                    override fun onCallback(value: EGFirebase.ItemItem) {
+                        FirebaseStorage.getInstance()
+                            .getReferenceFromUrl(value.img)
+                            .getBytes(Long.MAX_VALUE).addOnCompleteListener{
+                                when (itemNb) {
+                                    2->_item2.value = Item(value.id,value.desc,it.result)
+                                    3->_item3.value = Item(value.id,value.desc,it.result)
+                                }
+                            }
+                    }
+                }
+            )
+    }
+
+    data class Item(
+        val id: String="",
+        var desc: String="no item",
+        val img: ByteArray?=null
+    )
 }

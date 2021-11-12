@@ -36,7 +36,8 @@ class EGBluetooth @Inject constructor(
     val MY_UUID: UUID = UUID.fromString("8989063a-c9af-463a-b3f1-f21d9b2b827b")
     val TAG = "EG_BT"
 
-    private lateinit var manage: ConnectedThread
+    private lateinit var manage: DataThread
+    private lateinit var serverManage: DataThread
 
     private val _bluetoothAdapter: BluetoothAdapter? =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -45,51 +46,36 @@ class EGBluetooth @Inject constructor(
             @Suppress("DEPRECATION")
             BluetoothAdapter.getDefaultAdapter()
         }
-    val bluetoothAdapter get() = _bluetoothAdapter
 
     private val _message = MutableStateFlow("")
     val message get() = _message
 
-    init { // Vérification des capacités bluetooth TODO: wait for the intent to succeed before running Thread
+    init {
         // Check if BT is supported and enabled
         Log.d(TAG, "Bluetooth supported : " + (_bluetoothAdapter != null).toString())
-        if (!bluetoothAdapter!!.isEnabled) {
-            Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        }
-        Log.d(
-            TAG,
-            "Bluetooth enabled : ${_bluetoothAdapter?.isEnabled}, MAC : ${getBluetoothMacAddress()}"
-        )
-        GlobalScope.launch {
-            AcceptThread().run()
+        if (_bluetoothAdapter != null){
+            if (!_bluetoothAdapter.isEnabled) {
+                Log.d(TAG, "Bluetooth disabled, enabling...")
+                _bluetoothAdapter.enable()
+            }
+            Log.d(TAG, "Bluetooth enabled : ${_bluetoothAdapter.isEnabled}")
+            Log.d(TAG, "MAC : ${getBluetoothMacAddress()}")
+
+            GlobalScope.launch {
+                ServerThread().run()
+            }
         }
     }
 
     var handler = Handler(Looper.getMainLooper()) { msg ->
         when (msg.what) {
-            // Appelé quand on reçoit une donnée
             MESSAGE_READ -> {
                 val readBuff = msg.obj as ByteArray
-                val tempMsg = String(readBuff, 0, msg.arg1)
-                _message.value = tempMsg
+                _message.value = String(readBuff, 0, msg.arg1)
             }
         }
         true
     }
-
-
-    fun getBluetoothMacAddress(): String {
-        //TODO (send request to connected device. For now, MAC hardcoded)
-        val id = Build.ID
-        Log.d(TAG, id)
-        return when (id.toString()) {
-            "RP1A.200720.012" -> "E0:D0:83:DC:82:F0"
-            "QKQ1.191215.002" -> "DC:B7:2E:6D:5D:0B"
-            "RKQ1.200826.002" -> "98:F6:21:CB:FA:F1"
-            else -> "02:00:00:00:00:00"
-        }
-    }
-
 
     fun writeTo(mac: String, message: String) {
         val device = _bluetoothAdapter?.getRemoteDevice(mac)
@@ -97,7 +83,7 @@ class EGBluetooth @Inject constructor(
         if (device != null) {
             Log.d(TAG, "Device created : ${device.name}")
             GlobalScope.launch {
-                ConnectThread(device).run()
+                ClientThread(device).run()
                 Log.d(TAG, "Connect thread created")
                 try {
                     Log.d(TAG, "Sending message...")
@@ -112,16 +98,32 @@ class EGBluetooth @Inject constructor(
         }
     }
 
-    private fun manageConnectedSocket(socket: BluetoothSocket) {
+    fun respond(message:String) {
+        Log.d(TAG, "responding $message")
         GlobalScope.launch {
-            manage = ConnectedThread(socket)
-            manage.start()
+            serverManage.write(message.toByteArray())
+            serverManage.cancel()
+            ServerThread().run()
         }
     }
 
-    inner class AcceptThread : Thread() { // Server
+    fun getBluetoothMacAddress(): String {
+        //TODO (send request to connected device. For now, MAC hardcoded)
+        val id = Build.ID
+        Log.d(TAG, id)
+        return when (id.toString()) {
+            "RP1A.200720.012" -> "E0:D0:83:DC:82:F0" //TINA
+            "PQ3B.190801.002" -> "18:F0:E4:E3:20:B8" //MI A1
+            "QKQ1.191215.002" -> "DC:B7:2E:6D:5D:0B" //AMEL
+            "QKQ1.191002.002" -> "F4:60:E2:FF:EA:F3" //MI A2 Lite
+            "RKQ1.200826.002" -> "98:F6:21:CB:FA:F1" //Mateo
+            else -> "02:00:00:00:00:00"
+        }
+    }
+
+    inner class ServerThread : Thread() {
         private val mmServerSocket: BluetoothServerSocket? by lazy(LazyThreadSafetyMode.NONE) {
-            bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("EG_Bluetooth", MY_UUID)
+            _bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("EG_Bluetooth", MY_UUID)
         }
 
         override fun run() {
@@ -136,8 +138,10 @@ class EGBluetooth @Inject constructor(
                     null
                 }
                 socket?.also {
-                    manageConnectedSocket(it)
-
+                    GlobalScope.launch {
+                        serverManage = DataThread(socket)
+                        serverManage.start()
+                    }
                     mmServerSocket?.close()
                     shouldLoop = false
                 }
@@ -155,7 +159,7 @@ class EGBluetooth @Inject constructor(
     }
 
 
-    inner class ConnectThread(private val device: BluetoothDevice) : Thread() { // Client
+    inner class ClientThread(private val device: BluetoothDevice) : Thread() {
 
         private val btSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
             device.createRfcommSocketToServiceRecord(MY_UUID)
@@ -164,7 +168,7 @@ class EGBluetooth @Inject constructor(
         override fun run() {
             Log.d(TAG, "Start connect thread run to ${device.address}")
             // Cancel discovery because it otherwise slows down the connection.
-            bluetoothAdapter?.cancelDiscovery()
+            _bluetoothAdapter?.cancelDiscovery()
 
             btSocket?.let {
                 // Connect to the remote device through the socket. This call blocks
@@ -180,7 +184,8 @@ class EGBluetooth @Inject constructor(
 
                 // The connection attempt succeeded. Perform work associated with
                 // the connection in a separate thread.
-                manageConnectedSocket(it)
+                manage = DataThread(it)
+                manage.start()
             }
         }
 
@@ -195,7 +200,7 @@ class EGBluetooth @Inject constructor(
     }
 
 
-    inner class ConnectedThread(private val btSocket: BluetoothSocket) : Thread() {
+    inner class DataThread(private val btSocket: BluetoothSocket) : Thread() {
         private val btInStream: InputStream = btSocket.inputStream
         private val btOutStream: OutputStream = btSocket.outputStream
         private val btBuffer = ByteArray(1024) // mmBuffer store for the stream
@@ -220,7 +225,7 @@ class EGBluetooth @Inject constructor(
             }
         }
 
-        // Call this from the main activity to send data to the remote device.
+
         fun write(bytes: ByteArray) {
             try {
                 btOutStream.write(bytes)

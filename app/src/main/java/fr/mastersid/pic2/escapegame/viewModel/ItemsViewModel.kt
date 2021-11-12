@@ -11,42 +11,59 @@ import javax.inject.Inject
 @HiltViewModel
 class ItemsViewModel @Inject constructor(
     private val itemsRepository: ItemsRepository
-    ): ViewModel() {
-    private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
-    val itemNFC get() = _itemNFC
+    ): ViewModel()
+{
+    private val _itemId: LiveData<String> = itemsRepository.itemId.asLiveData()
+    val itemId get() = _itemId
 
-    private val _message = itemsRepository.message.asLiveData()
-    val message get() = _message
+    private val _messageBT: LiveData<String> = itemsRepository.messageBT.asLiveData()
+    val messageBT get() = _messageBT
+
+    private val _item1 = itemsRepository.item1.asLiveData()
+    val item1 get() = _item1
+
+    private val _item2 = itemsRepository.item2.asLiveData()
+    val item2 get() = _item2
+
+    private val _item3 = itemsRepository.item3.asLiveData()
+    val item3 get() = _item3
 
 
     private var _playerNumber = -1
 
 
-    private val _itemDesc: LiveData<String> = itemsRepository.itemDesc.asLiveData()
-    val itemDesc get() = _itemDesc
-
-    private val _itemImg: LiveData<ByteArray?> = itemsRepository.itemImg.asLiveData()
-    val itemImg get() = _itemImg
-
-    fun updateItem() {
-        if (_itemNFC.value.toString().isNotEmpty())
-            itemsRepository.fetchItem(_itemNFC.value.toString())
-    }
-
     fun setPlayerNumber(playerNumber: Int) {
         _playerNumber = playerNumber
     }
 
-    fun sendRequestItem() {
+    fun sendRequestItem(destPlayer:Int) {
         Log.d("hello","item viewModel")
 
- //       itemsRepository.sendRequestItem("player2")
-        itemsRepository.sendRequestItem("player3")
+        when (destPlayer){
+            2-> itemsRepository.sendRequestItem("player2")
+            3-> itemsRepository.sendRequestItem("player3")
+        }
     }
 
-    fun sendItem(item : String, playerNumber: Int ){
+    fun sendItemAs(item : String, playerNumber: Int ){
         when (playerNumber){
-            2,3->itemsRepository.sendItem("master",item)
+            1->{
+                //itemsRepository.sendItem(2,item)
+                //itemsRepository.sendItem(3,item)
+            }
+            2->{
+                //itemsRepository.sendItem(3,item)
+                itemsRepository.respondItem(2,item)
+            }
+            3->{
+                //itemsRepository.sendItem(2,item)
+                itemsRepository.respondItem(3,item)
+            }
         }
+    }
+
+    fun updateItem(player: Int, item: String) {
+        if (player==1) itemsRepository.fetchItem(item, _playerNumber)
+        else itemsRepository.fetchItem(item, player)
     }
 }

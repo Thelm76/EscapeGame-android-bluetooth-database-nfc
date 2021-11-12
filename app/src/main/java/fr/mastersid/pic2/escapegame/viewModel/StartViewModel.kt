@@ -11,22 +11,21 @@ import javax.inject.Inject
 @HiltViewModel
 class StartViewModel @Inject constructor(
     private val usersRepository : UsersRepository
- ) : ViewModel(){
+    ) : ViewModel()
+{
 
+    private val _connected : LiveData<List<Boolean>> = usersRepository.usersConnected.asLiveData()
+    val connected get() = _connected
 
-    fun setConnected (user:Int){
+    fun setConnected (user:Int, connected: Boolean){
         usersRepository.setConnected(
             when (user) {
                 1-> "master"
                 2-> "player2"
                 3-> "player3"
                 else -> ""
-            }
-            ,true)
+            },
+            connected
+        )
     }
-
-
-     private val _connected : LiveData<List<Boolean>> = usersRepository.usersConnected.asLiveData()
-     val connected get() = _connected
-
 }
