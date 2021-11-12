@@ -5,13 +5,15 @@ import com.google.firebase.storage.FirebaseStorage
 import fr.mastersid.pic2.escapegame.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class ItemsRepository @Inject constructor(
     private val escapeGameFirebase: EGFirebase,
     escapeGameNfc: EGNFC,
     private val escapeGameBluetooth : EGBluetooth
-    ) {
+    )
+{
+    private val _message: MutableStateFlow<String> = escapeGameBluetooth.message
+    val message get() = _message
 
     private val _lastScan: MutableStateFlow<String> = escapeGameNfc.lastScan
     val lastScan get ()= _lastScan
@@ -42,9 +44,18 @@ class ItemsRepository @Inject constructor(
             override fun onCallback(value: EGFirebase.UsersItem) {
 
                 escapeGameBluetooth.writeTo(value.mac, "fetch_item")
+
                 Log.d("hello", value.mac)
                 Log.d("hello","fetc item")
                 Log.d("hello","repository 2 item")
+            }
+        })
+    }
+
+    fun sendItem(user: String, item: String){
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
+            override fun onCallback(value: EGFirebase.UsersItem) {
+                escapeGameBluetooth.writeTo(value.mac, "item:$item")
             }
         })
     }

@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 import java.io.InputStream
@@ -47,13 +47,13 @@ class EGBluetooth @Inject constructor(
         }
     val bluetoothAdapter get() = _bluetoothAdapter
 
-    private val _message = MutableLiveData("")
+    private val _message = MutableStateFlow("")
     val message get() = _message
 
     init { // Vérification des capacités bluetooth TODO: wait for the intent to succeed before running Thread
         // Check if BT is supported and enabled
         Log.d(TAG, "Bluetooth supported : " + (_bluetoothAdapter != null).toString())
-        if (bluetoothAdapter?.isEnabled == false) {
+        if (!bluetoothAdapter!!.isEnabled) {
             Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         }
         Log.d(
@@ -73,9 +73,6 @@ class EGBluetooth @Inject constructor(
                 val tempMsg = String(readBuff, 0, msg.arg1)
                 _message.value = tempMsg
             }
-            MESSAGE_REQ_ITEMS -> {
-
-            }
         }
         true
     }
@@ -87,8 +84,8 @@ class EGBluetooth @Inject constructor(
         Log.d(TAG, id)
         return when (id.toString()) {
             "RP1A.200720.012" -> "E0:D0:83:DC:82:F0"
-            "QKQ1.191215.002" -> "dc:b7:2e:6d:5d:0b"
-            "RKQ1.200826.002" -> "98:f6:21:cb:fa:f1"
+            "QKQ1.191215.002" -> "DC:B7:2E:6D:5D:0B"
+            "RKQ1.200826.002" -> "98:F6:21:CB:FA:F1"
             else -> "02:00:00:00:00:00"
         }
     }

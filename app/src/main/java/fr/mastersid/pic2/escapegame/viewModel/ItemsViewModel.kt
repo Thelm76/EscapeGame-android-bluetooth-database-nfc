@@ -15,6 +15,10 @@ class ItemsViewModel @Inject constructor(
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
     val itemNFC get() = _itemNFC
 
+    private val _message = itemsRepository.message.asLiveData()
+    val message get() = _message
+
+
     private var _playerNumber = -1
 
 
@@ -36,7 +40,13 @@ class ItemsViewModel @Inject constructor(
     fun sendRequestItem() {
         Log.d("hello","item viewModel")
 
-        itemsRepository.sendRequestItem("player2")
+ //       itemsRepository.sendRequestItem("player2")
         itemsRepository.sendRequestItem("player3")
+    }
+
+    fun sendItem(item : String, playerNumber: Int ){
+        when (playerNumber){
+            2,3->itemsRepository.sendItem("master",item)
+        }
     }
 }

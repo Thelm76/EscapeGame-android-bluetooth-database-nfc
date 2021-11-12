@@ -36,7 +36,12 @@ class LobbyFragment : Fragment() {
         val lobbyViewModel: LobbyViewModel by hiltNavGraphViewModels(R.id.nav_graph)
         val args: LobbyFragmentArgs by navArgs()
 
-
+        val playerNumber = args.playerNumber
+        //récuperer l'@ MAC
+        val Mac = lobbyViewModel.MacAddress()
+        //Log.d("hello", "Fragment" + Mac)
+        //Save l'@ MAC
+        lobbyViewModel.SaveMacAddress(Mac, playerNumber)
 
         lobbyViewModel.connected.observe(this) { value ->
             //TODO get connected players from DB & allow continuing party if everyone is connected
@@ -58,14 +63,7 @@ class LobbyFragment : Fragment() {
             }
         }
 
-
         _binding.playButton.setOnClickListener {
-            val playerNumber = args.playerNumber
-            //récuperer l'@ MAC
-            val Mac = lobbyViewModel.MacAddress()
-            //Log.d("hello", "Fragment" + Mac)
-            //Save l'@ MAC
-            lobbyViewModel.SaveMacAddress(Mac, playerNumber)
             val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumber)
             findNavController().navigate(action)
         }

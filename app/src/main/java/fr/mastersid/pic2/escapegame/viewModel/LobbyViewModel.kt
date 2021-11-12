@@ -26,13 +26,9 @@ class LobbyViewModel @Inject constructor(
             when (playerNumber){
                 1 -> "master"
                 2 -> "player2"
-                3 -> "player2"
+                3 -> "player3"
                 else -> ""
             })
-    }
-
-    fun sendItem(mac : String, playerNumber: String ){
-        lobbyRepository.sendItem(mac,playerNumber)
     }
 
     fun setDisconnected (user: Int){

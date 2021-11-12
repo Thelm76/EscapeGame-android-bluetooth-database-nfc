@@ -46,7 +46,12 @@ class ItemsFragment : Fragment() {
             _binding.itemName.text=desc
         }
 
-
+        itemsViewModel.message.observe(this){ value ->
+            when {
+                value=="fetch_item"-> itemsViewModel.itemNFC.value?.let { itemsViewModel.sendItem(it,1) }
+                value.startsWith("item:")-> Log.d("WEEEEE", value.substring(5))
+            }
+        }
 
         _binding.buttonFusion.setOnClickListener(){
             Log.d("hello","item fragment")
