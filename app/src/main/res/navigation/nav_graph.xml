@@ -16,9 +16,9 @@
 
     <fragment
         android:id="@+id/lobyFragment"
-        android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
+        android:name="fr.mastersid.pic2.escapegame.view.LobbyFragment"
         android:label="LobyFragment"
-        tools:layout="@layout/fragment_loby">
+        tools:layout="@layout/fragment_lobby">
 
         <argument
             android:name="playerNumber"
@@ -33,7 +33,7 @@
         android:id="@+id/nfcFragment"
         android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
         android:label="NfcFragment"
-        tools:layout="@layout/fragment_nfc">
+        tools:layout="@layout/fragment_items">
         <argument
             android:name="PlayerNumber"
             app:argType="integer" />

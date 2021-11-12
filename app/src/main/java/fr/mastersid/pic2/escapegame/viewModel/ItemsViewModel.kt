@@ -9,20 +9,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemsViewModel @Inject constructor(
-    itemsRepository: ItemsRepository,
-    private val firebaseRepository: ItemsRepository
-): ViewModel() {
+    private val itemsRepository: ItemsRepository
+    ): ViewModel() {
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
     val itemNFC get() = _itemNFC
 
-    private val _itemDesc: LiveData<String> = firebaseRepository.itemDesc.asLiveData()
+    private val _itemDesc: LiveData<String> = itemsRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
-    private val _itemImg: LiveData<ByteArray?> = firebaseRepository.itemImg.asLiveData()
+    private val _itemImg: LiveData<ByteArray?> = itemsRepository.itemImg.asLiveData()
     val itemImg get() = _itemImg
 
     fun updateItem() {
         if (_itemNFC.value.toString().isNotEmpty())
-            firebaseRepository.fetchItem(_itemNFC.value.toString())
+            itemsRepository.fetchItem(_itemNFC.value.toString())
     }
 }

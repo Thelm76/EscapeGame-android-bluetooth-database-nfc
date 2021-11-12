@@ -17,6 +17,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
 // Defines several constants used when transmitting messages between the
@@ -25,8 +26,10 @@ const val MESSAGE_READ: Int = 0
 const val MESSAGE_WRITE: Int = 1
 const val MESSAGE_TOAST: Int = 2
 const val MESSAGE_REQ_MAC: Int = 3
+const val MESSAGE_REQ_ITEMS: Int = 4
 // ... (Add other message types here as needed.)
 
+@Singleton
 class EGBluetooth @Inject constructor(
     @ApplicationContext appContext: Context
 ) {
@@ -53,7 +56,10 @@ class EGBluetooth @Inject constructor(
         if (bluetoothAdapter?.isEnabled == false) {
             Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         }
-        Log.d(TAG,"Bluetooth enabled : ${_bluetoothAdapter?.isEnabled}, MAC : ${getBluetoothMacAddress()}")
+        Log.d(
+            TAG,
+            "Bluetooth enabled : ${_bluetoothAdapter?.isEnabled}, MAC : ${getBluetoothMacAddress()}"
+        )
         GlobalScope.launch {
             AcceptThread().run()
         }
@@ -67,6 +73,9 @@ class EGBluetooth @Inject constructor(
                 val tempMsg = String(readBuff, 0, msg.arg1)
                 _message.value = tempMsg
             }
+            MESSAGE_REQ_ITEMS -> {
+
+            }
         }
         true
     }
@@ -76,11 +85,13 @@ class EGBluetooth @Inject constructor(
         //TODO (send request to connected device. For now, MAC hardcoded)
         val id = Build.ID
         Log.d(TAG, id)
-        return when (id) {
-            //TODO associate id to MAC address
+        return when (id.toString()) {
+            "RP1A.200720.012" -> "E0:D0:83:DC:82:F0"
+            "QKQ1.191215.002" -> "dc:b7:2e:6d:5d:0b"
             else -> "02:00:00:00:00:00"
         }
     }
+
 
     fun writeTo(mac: String, message: String) {
         val device = _bluetoothAdapter?.getRemoteDevice(mac)

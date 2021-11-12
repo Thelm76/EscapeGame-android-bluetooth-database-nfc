@@ -8,7 +8,7 @@ import javax.inject.Inject
 class ItemsRepository @Inject constructor(
     private val escapeGameFirebase: EGFirebase,
     escapeGameNfc: EGNFC
-    ) {
+) {
 
     private val _lastScan: MutableStateFlow<String> = escapeGameNfc.lastScan
     val lastScan get ()= _lastScan
