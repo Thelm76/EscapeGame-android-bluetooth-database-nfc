@@ -1,5 +1,6 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -14,6 +15,9 @@ class ItemsViewModel @Inject constructor(
     private val _itemNFC: LiveData<String> = itemsRepository.lastScan.asLiveData()
     val itemNFC get() = _itemNFC
 
+    private var _playerNumber = -1
+
+
     private val _itemDesc: LiveData<String> = itemsRepository.itemDesc.asLiveData()
     val itemDesc get() = _itemDesc
 
@@ -23,5 +27,16 @@ class ItemsViewModel @Inject constructor(
     fun updateItem() {
         if (_itemNFC.value.toString().isNotEmpty())
             itemsRepository.fetchItem(_itemNFC.value.toString())
+    }
+
+    fun setPlayerNumber(playerNumber: Int) {
+        _playerNumber = playerNumber
+    }
+
+    fun sendRequestItem() {
+        Log.d("hello","item viewModel")
+
+        itemsRepository.sendRequestItem("player2")
+        itemsRepository.sendRequestItem("player3")
     }
 }

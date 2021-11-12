@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import fr.mastersid.pic2.escapegame.R
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobbyBinding
 import fr.mastersid.pic2.escapegame.viewModel.LobbyViewModel
-import java.util.*
 
 /**
  *Created by Bryan BARRE on 15/10/2021.
@@ -58,8 +58,13 @@ class LobbyFragment : Fragment() {
 
 
         _binding.playButton.setOnClickListener {
-            val playerNumbers = args.playerNumber
-            val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumbers)
+            val playerNumber = args.playerNumber
+            //récuperer l'@ MAC
+            val Mac = lobbyViewModel.MacAddress()
+            //Log.d("hello", "Fragment" + Mac)
+            //Save l'@ MAC
+            lobbyViewModel.SaveMacAddress(Mac, playerNumber)
+            val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumber)
             findNavController().navigate(action)
         }
     }

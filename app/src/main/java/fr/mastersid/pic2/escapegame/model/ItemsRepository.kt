@@ -1,9 +1,11 @@
 package fr.mastersid.pic2.escapegame.model
 
+import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import fr.mastersid.pic2.escapegame.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
 class ItemsRepository @Inject constructor(
     private val escapeGameFirebase: EGFirebase,
@@ -34,6 +36,16 @@ class ItemsRepository @Inject constructor(
         })
     }
 
+    fun sendRequestItem(user: String) {
+        Log.d("hello","repository item")
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
+            override fun onCallback(value: EGFirebase.UsersItem) {
 
-
+                escapeGameBluetooth.writeTo(value.mac, "fetch_item")
+                Log.d("hello", value.mac)
+                Log.d("hello","fetc item")
+                Log.d("hello","repository 2 item")
+            }
+        })
+    }
 }

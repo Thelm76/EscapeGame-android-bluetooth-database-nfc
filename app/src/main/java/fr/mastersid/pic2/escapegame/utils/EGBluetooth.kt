@@ -88,6 +88,7 @@ class EGBluetooth @Inject constructor(
         return when (id.toString()) {
             "RP1A.200720.012" -> "E0:D0:83:DC:82:F0"
             "QKQ1.191215.002" -> "dc:b7:2e:6d:5d:0b"
+            "RKQ1.200826.002" -> "98:f6:21:cb:fa:f1"
             else -> "02:00:00:00:00:00"
         }
     }

@@ -1,6 +1,7 @@
 package fr.mastersid.pic2.escapegame.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class ItemsFragment : Fragment() {
         val args: ItemsFragmentArgs by navArgs()
         val itemsViewModel: ItemsViewModel by hiltNavGraphViewModels(R.id.nav_graph)
 
+        itemsViewModel.setPlayerNumber(args.playerNumber)
+
         itemsViewModel.itemNFC.observe(this){ item ->
             itemsViewModel.updateItem()
         }
@@ -41,6 +44,14 @@ class ItemsFragment : Fragment() {
 
         itemsViewModel.itemDesc.observe(this){ desc ->
             _binding.itemName.text=desc
+        }
+
+
+
+        _binding.buttonFusion.setOnClickListener(){
+            Log.d("hello","item fragment")
+            itemsViewModel.sendRequestItem()
+
         }
 
         itemsViewModel.itemImg.observe(this){img ->

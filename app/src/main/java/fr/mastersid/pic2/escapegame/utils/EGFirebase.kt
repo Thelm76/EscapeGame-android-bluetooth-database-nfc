@@ -54,7 +54,8 @@ class EGFirebase{
 
     data class UsersItem(
         var uid: String="",
-        var connected: Boolean = false
+        var connected: Boolean = false,
+        var mac: String = ""
     )
 
     data class ItemItem(

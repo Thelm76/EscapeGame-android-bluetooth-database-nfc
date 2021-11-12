@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/inscriptionRouen/MASTER2/Cours/semestre1/Projet-S1/app/src/main/res/layout/fragment_loby.xml" value="0.1" />
-        <entry key="..\:/Users/pc/AndroidStudioProjects/Projet-S1/itm_project/app/src/main/res/layout/fragment_lobby.xml" value="0.1" />
-        <entry key="..\:/Users/pc/AndroidStudioProjects/Projet-S1/itm_project/app/src/main/res/layout/fragment_loby.xml" value="0.11639492753623189" />
-        <entry key="..\:/Users/pc/AndroidStudioProjects/Projet-S1/itm_project/app/src/main/res/layout/fragment_start.xml" value="0.11639492753623189" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_box_outline_blank_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/no_item.xml" value="0.1" />
@@ -16,7 +12,6 @@
         <entry key="app/src/main/res/layout/fragment_items.xml" value="0.35052083333333334" />
         <entry key="app/src/main/res/layout/fragment_nfc.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/fragment_start.xml" value="0.296195652173913" />
-        <entry key="app/src/main/res/layout/loby_fragment.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/items_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/loby_fragment.xml" value="0.296195652173913" />
         <entry key="app/src/main/res/layout/start_fragment.xml" value="0.296195652173913" />
