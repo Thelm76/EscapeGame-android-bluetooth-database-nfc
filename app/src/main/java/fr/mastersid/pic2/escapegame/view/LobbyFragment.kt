@@ -50,11 +50,9 @@ class LobbyFragment : Fragment() {
                 _binding.switch3.isChecked = value[2]
                 _binding.player3ProgressBar.isVisible = !value[2]
 
-
                 _binding.playButton.isEnabled = value[0] && value[1] && value[2]
-                _binding.playButton.isVisible = args.playerNumber==1
+                _binding.playButton.isVisible = true
             }
-
 
         }
 
