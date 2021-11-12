@@ -8,7 +8,6 @@ import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
 import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 
@@ -16,7 +15,6 @@ import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
  *Created by Bryan BARRE on 15/10/2021.
  */
 //TODO Add Fetch and Fuse buttons and send enigma code to next view
-@AndroidEntryPoint
 class ItemsFragment : Fragment() {
     private lateinit var _binding: FragmentItemsBinding
 

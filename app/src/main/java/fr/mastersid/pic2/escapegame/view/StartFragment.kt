@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 
 /**
  *Created by Bryan BARRE on 15/10/2021.
  */
 //TODO synchronize connected users to DB. If user already connected disable button
+@AndroidEntryPoint
 class StartFragment : Fragment() {
     private lateinit var _binding: FragmentStartBinding
     override fun onCreateView(
