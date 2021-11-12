@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import fr.mastersid.pic2.escapegame.R
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobbyBinding
@@ -54,22 +55,13 @@ class LobbyFragment : Fragment() {
                 _binding.playButton.isEnabled = value[0] && value[1] && value[2]
                 _binding.playButton.isVisible = args.playerNumber==1
             }
-
-
         }
 
 
-        /*_binding.playButton.setOnClickListener {
+        _binding.playButton.setOnClickListener {
             val playerNumbers = args.playerNumber
-            val action = LobyFragmentDirections.actionLobyFragmentToNfcFragment(playerNumbers)
+            val action = LobbyFragmentDirections.actionLobbyFragmentToItemsFragment(playerNumbers)
             findNavController().navigate(action)
-        }*/
-        /*_binding.playButton.setOnClickListener(){
-
-            Log.d("Hello", lobyModel.getMacAddress())
-        }*/
-
+        }
     }
-
-
 }

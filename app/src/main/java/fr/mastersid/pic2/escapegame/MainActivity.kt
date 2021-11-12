@@ -3,10 +3,9 @@ package fr.mastersid.pic2.escapegame
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.FirebaseDatabase
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -31,8 +30,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(_binding.toolbar)
 
         pendingIntent = PendingIntent.getActivity(
-            this, 0,
-            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
+            this,
+            0,
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
         )
 
         if (intent != null) {

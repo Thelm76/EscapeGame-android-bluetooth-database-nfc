@@ -36,9 +36,9 @@ class StartFragment : Fragment() {
         startViewModel.connected.observe(this){
            value ->
             if (value.isNotEmpty()){
-                _binding.button1.isEnabled=!value.get(0)
-                _binding.button2.isEnabled=!value.get(1)
-                _binding.button3.isEnabled=!value.get(2)
+                _binding.button1.isEnabled=!value[0]
+                _binding.button2.isEnabled=!value[1]
+                _binding.button3.isEnabled=!value[2]
             }
 
         }

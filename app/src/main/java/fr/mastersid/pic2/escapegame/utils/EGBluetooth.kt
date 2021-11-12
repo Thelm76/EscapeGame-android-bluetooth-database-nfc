@@ -36,7 +36,7 @@ class EGBluetooth @Inject constructor(
     val MY_UUID: UUID = UUID.fromString("8989063a-c9af-463a-b3f1-f21d9b2b827b")
     val TAG = "EG_BT"
 
-    lateinit var manage: ConnectedThread
+    private lateinit var manage: ConnectedThread
 
     private val _bluetoothAdapter: BluetoothAdapter? =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
