@@ -54,7 +54,6 @@ class LobbyFragment : Fragment() {
                 _binding.playButton.isEnabled = value[0] && value[1] && value[2]
                 _binding.playButton.isVisible = true
             }
-
         }
 
 
