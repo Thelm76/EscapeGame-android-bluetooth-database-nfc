@@ -25,7 +25,6 @@ class StartFragment : Fragment() {
         return _binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val startViewModel : StartViewModel by viewModels()
@@ -37,7 +36,6 @@ class StartFragment : Fragment() {
                 _binding.button2.isEnabled=!value[1]
                 _binding.button3.isEnabled=!value[2]
             }
-
         }
 
         //TODO: for debug purpose, please remove on final version

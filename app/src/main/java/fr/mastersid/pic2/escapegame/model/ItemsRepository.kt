@@ -22,11 +22,8 @@ class ItemsRepository @Inject constructor(
     private val _item3: MutableStateFlow<Item> = MutableStateFlow(Item())
     val item3 get ()= _item3
 
-
     private val _messageBT: MutableStateFlow<String> = escapeGameBluetooth.message
     val messageBT get() = _messageBT
-
-
 
     private val _itemId: MutableStateFlow<String> = escapeGameNfc.lastScan
     val itemId get ()= _itemId.onEach { value->

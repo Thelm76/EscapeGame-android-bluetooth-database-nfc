@@ -14,7 +14,6 @@ class EGFirebase{
 
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
-
     fun writeAttribute( db : DB, child: String, attribute : String, value : Any){
         database.getReference((db.dbName)).child(child).child(attribute).setValue(value)
     }
@@ -38,7 +37,6 @@ class EGFirebase{
                     tItem = dataSnapshot.getValue<dataType>()
                     tItem?.let { callback.onCallback(it) }
                 }
-
                 override fun onCancelled(error: DatabaseError) {
                     Log.w(TAG, "loadItem:onCancelled", error.toException())
                 }

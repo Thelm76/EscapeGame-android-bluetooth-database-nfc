@@ -25,19 +25,15 @@ class ItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemsBinding.inflate(inflater)
-
         (activity as MainActivity).supportActionBar?.title = "Items"
         return _binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args: ItemsFragmentArgs by navArgs()
         val itemsViewModel: ItemsViewModel by hiltNavGraphViewModels(R.id.nav_graph)
-
         itemsViewModel.setPlayerNumber(args.playerNumber)
-
         //Needed to permit repository flow update...
         itemsViewModel.itemId.observe(this) {}
 
@@ -73,7 +69,6 @@ class ItemsFragment : Fragment() {
         }
 
         itemsViewModel.randomEnigma.observe(this) { value ->
-            //Toast.makeText(context,"la question sera $value",5).show()
             if (value != -1) {
                 val action = ItemsFragmentDirections.actionItemsFragmentToEnigmaFragment(value)
                 findNavController().navigate(action)

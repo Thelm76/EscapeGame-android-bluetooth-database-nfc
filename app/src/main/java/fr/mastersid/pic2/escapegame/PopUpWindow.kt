@@ -38,7 +38,6 @@ class PopUpWindow : AppCompatActivity() {
         }
         colorAnimation.start()
 
-
         // Fade animation for the Popup Window
         popup_window_view.alpha = 0f
         popup_window_view.animate().alpha(1f).setDuration(500).setInterpolator(
