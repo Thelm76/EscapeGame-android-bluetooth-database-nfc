@@ -28,16 +28,16 @@ class ItemsViewModel @Inject constructor(
     private val _item3 = itemsRepository.item3.asLiveData()
     val item3 get() = _item3
 
+    private val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
+    val randomEnigma get() = _randomEnigma
 
     private var _playerNumber = -1
-
 
     fun setPlayerNumber(playerNumber: Int) {
         _playerNumber = playerNumber
     }
 
     fun sendRequestItem(destPlayer:Int) {
-        Log.d("hello","item viewModel")
 
         when (destPlayer){
             2-> itemsRepository.sendRequestItem("player2")
@@ -63,11 +63,9 @@ class ItemsViewModel @Inject constructor(
     }
 
     fun updateItem(player: Int, item: String) {
-        if (player==1) itemsRepository.fetchItem(item, _playerNumber)
+        if (player == 1) itemsRepository.fetchItem(item, _playerNumber)
         else itemsRepository.fetchItem(item, player)
-
-    private val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
-    val randomEnigma get() = _randomEnigma
+    }
 
     fun updateRandomEnigma(){
         itemsRepository.randomizeEnigma()

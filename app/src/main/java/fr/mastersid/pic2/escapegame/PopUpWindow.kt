@@ -16,7 +16,7 @@ class PopUpWindow : AppCompatActivity() {
     private var popupText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        this.setTitle("Help")
+        this.title = "Help"
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
 

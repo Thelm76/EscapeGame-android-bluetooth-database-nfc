@@ -75,7 +75,7 @@ class ItemsFragment : Fragment() {
         itemsViewModel.randomEnigma.observe(this) { value ->
             //Toast.makeText(context,"la question sera $value",5).show()
             if (value != -1) {
-                val action = ItemsFragmentDirections.actionNfcFragmentToEnigmaFragment(value)
+                val action = ItemsFragmentDirections.actionItemsFragmentToEnigmaFragment(value)
                 findNavController().navigate(action)
             }
         }

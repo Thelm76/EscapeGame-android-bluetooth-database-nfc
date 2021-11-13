@@ -42,6 +42,9 @@
         <argument
             android:name="playerNumber"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_itemsFragment_to_enigmaFragment"
+            app:destination="@id/enigmaFragment" />
     </fragment>
 
     <fragment

@@ -25,7 +25,7 @@ class LobbyFragment : Fragment() {
         return _binding.root
     }
 
-    //TODO initialize bluetooth connection and share BT MAC adresses
+    //TODO initialize bluetooth connection and share BT MAC addresses
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val lobbyViewModel: LobbyViewModel by hiltNavGraphViewModels(R.id.nav_graph)
