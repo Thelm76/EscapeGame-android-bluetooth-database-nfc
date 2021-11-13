@@ -16,7 +16,6 @@ class PopUpWindow : AppCompatActivity() {
     private var popupText = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         this.setTitle("Help")
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
@@ -28,10 +27,6 @@ class PopUpWindow : AppCompatActivity() {
         popupText = bundle?.getString("popuptext", "notice") ?: ""
         // Set the data
         popup_window_text.text = popupText
-
-
-
-
 
         // Fade animation for the background of Popup Window
         val alpha = 100 //between 0-255
