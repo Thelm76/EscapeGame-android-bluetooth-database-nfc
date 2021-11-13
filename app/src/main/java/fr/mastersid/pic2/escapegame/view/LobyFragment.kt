@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import fr.mastersid.pic2.escapegame.MainActivity
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobyBinding
 
 class LobyFragment : Fragment() {
@@ -18,6 +19,7 @@ class LobyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLobyBinding.inflate(inflater)
+        (activity as MainActivity).supportActionBar?.title = "Lobby"
         return _binding.root
     }
 

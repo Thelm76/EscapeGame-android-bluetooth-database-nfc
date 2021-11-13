@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import fr.mastersid.pic2.escapegame.MainActivity
 import fr.mastersid.pic2.escapegame.databinding.FragmentEnigmaBinding
 import fr.mastersid.pic2.escapegame.viewModel.EnigmaViewModel
 
@@ -23,6 +24,7 @@ class EnigmaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentEnigmaBinding.inflate(inflater)
+        (activity as MainActivity).supportActionBar?.title = "Enigma"
         return _binding.root
     }
 
@@ -51,26 +53,20 @@ class EnigmaFragment : Fragment() {
                 if (enigma.answer=="aid2"){
                     Toast.makeText(context,"gg",10).show()
                     _binding.imageView6.isVisible=true
-
                 }
             }
             _binding.btnAnswer3.setOnClickListener{
                 if (enigma.answer =="aid3"){
                     Toast.makeText(context,"gg",10).show()
                     _binding.imageView6.isVisible=true
-
                 }
             }
             _binding.btnAnswer4.setOnClickListener{
                 if (enigma.answer =="aid4"){
                     Toast.makeText(context,"gg",10).show()
                     _binding.imageView6.isVisible=true
-
                 }
             }
         }
-
-
-
     }
 }

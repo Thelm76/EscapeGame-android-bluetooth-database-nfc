@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import fr.mastersid.pic2.escapegame.MainActivity
 import fr.mastersid.pic2.escapegame.databinding.FragmentStartBinding
 
 //TODO synchronize connected users to DB. If user already connected disable button
@@ -17,6 +18,7 @@ class StartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentStartBinding.inflate(inflater)
+        (activity as MainActivity).supportActionBar?.title = "EscapeGame"
         return _binding.root
     }
 

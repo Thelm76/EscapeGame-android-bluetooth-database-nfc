@@ -5,14 +5,14 @@ import android.content.Intent
 import android.nfc.NfcAdapter
 import android.os.Bundle
 import android.util.Log
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.FirebaseDatabase
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_items.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
         setSupportActionBar(_binding.toolbar)
-
+        //this.supportActionBar?.title = "Start"
         pendingIntent = PendingIntent.getActivity(
             this, 0,
             Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
@@ -72,16 +72,38 @@ class MainActivity : AppCompatActivity() {
 
     //TODO allow text to be different depending on the current view, and move to strings.xml
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("test", "---------------------------------------")
+        //item.title=_binding.toolbar.title
         val intent = Intent(this, PopUpWindow::class.java)
-        intent.putExtra("popuptitle", "Error")
-        intent.putExtra(
-            "popuptext",
-            "voici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\nvoici la fenetre qui servira a afficher les instructions pour chaque jeu\n"
-        )
-        intent.putExtra("popupbtn", "OK")
-        intent.putExtra("darkstatusbar", false)
+        when (_binding.toolbar.title) {
+            "EscapeGame" -> {
+                intent.putExtra(
+                    "popuptext",
+                    "notice frag EscapeGame"
+                )
+            }
+            "Lobby" -> {
+                intent.putExtra(
+                    "popuptext",
+                    "notice frag Lobby"
+                )
+            }
+            "Items" -> {
+                intent.putExtra(
+                    "popuptext",
+                    "notice frag Items"
+                )
+            }
+            "Enigma" -> {
+                intent.putExtra(
+                    "popuptext",
+                    "notice frag Enigma"
+                )
+            }
+        }
+
         startActivity(intent)
-        return true//item.onNavDestinationSelected(findNavController(R.id.navHostFragment))
+        return true
     }
+
+
 }

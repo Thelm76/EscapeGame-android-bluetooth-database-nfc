@@ -6,6 +6,7 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.ColorUtils
@@ -13,9 +14,10 @@ import kotlinx.android.synthetic.main.popup_window.*
 
 class PopUpWindow : AppCompatActivity() {
     private var popupText = ""
-    private var popupButton = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        this.setTitle("Help")
         super.onCreate(savedInstanceState)
         overridePendingTransition(0, 0)
 
@@ -23,12 +25,12 @@ class PopUpWindow : AppCompatActivity() {
 
         // Get the data
         val bundle = intent.extras
-        popupText = bundle?.getString("popuptext", "Text") ?: ""
-        popupButton = bundle?.getString("popupbtn", "Button") ?: ""
-
+        popupText = bundle?.getString("popuptext", "notice") ?: ""
         // Set the data
         popup_window_text.text = popupText
-        popup_window_button.text = popupButton
+
+
+
 
 
         // Fade animation for the background of Popup Window
@@ -47,7 +49,6 @@ class PopUpWindow : AppCompatActivity() {
         popup_window_view.animate().alpha(1f).setDuration(500).setInterpolator(
             DecelerateInterpolator()
         ).start()
-
 
         // Close the Popup Window when you press the button
         popup_window_button.setOnClickListener {

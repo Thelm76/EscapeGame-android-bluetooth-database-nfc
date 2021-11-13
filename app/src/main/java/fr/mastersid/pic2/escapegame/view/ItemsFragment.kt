@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import fr.mastersid.pic2.escapegame.MainActivity
 import fr.mastersid.pic2.escapegame.databinding.FragmentItemsBinding
 import fr.mastersid.pic2.escapegame.viewModel.ItemsViewModel
 
@@ -24,6 +25,8 @@ class ItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentItemsBinding.inflate(inflater)
+
+        (activity as MainActivity).supportActionBar?.title = "Items"
         return _binding.root
     }
 
@@ -74,6 +77,8 @@ class ItemsFragment : Fragment() {
             }
         }
     }
+
+
 }
 
 
