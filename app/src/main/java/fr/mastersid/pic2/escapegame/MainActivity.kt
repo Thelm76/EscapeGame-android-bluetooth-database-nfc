@@ -3,16 +3,14 @@ package fr.mastersid.pic2.escapegame
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NfcAdapter
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_items.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,17 +27,17 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
         setSupportActionBar(_binding.toolbar)
-        //this.supportActionBar?.title = "Start"
-        pendingIntent = PendingIntent.getActivity(
-            this, 0,
-            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0
-        )
 
-        if (intent != null) {
-            // Check if the app was started via an NDEF intent
-            //logMessage("Found intent in onCreate", intent.action.toString())
-            processIntent(intent)
-        }
+        pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            Intent(this, javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
     }
 
     override fun onResume() {
@@ -99,10 +97,7 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-
         startActivity(intent)
         return true
     }
-
-
 }

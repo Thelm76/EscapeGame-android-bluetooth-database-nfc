@@ -10,38 +10,39 @@
         android:label="StartFragment"
         tools:layout="@layout/fragment_start">
         <action
-            android:id="@+id/action_startFragment_to_lobyFragment"
-            app:destination="@id/lobyFragment" />
+            android:id="@+id/action_startFragment_to_lobbyFragment"
+            app:destination="@id/lobbyFragment" />
+        <argument android:name="playerNumber"
+            app:argType="integer" />
     </fragment>
 
     <fragment
-        android:id="@+id/lobyFragment"
-        android:name="fr.mastersid.pic2.escapegame.view.LobyFragment"
-        android:label="LobyFragment"
-        tools:layout="@layout/fragment_loby">
+        android:id="@+id/lobbyFragment"
+        android:name="fr.mastersid.pic2.escapegame.view.LobbyFragment"
+        android:label="LobbyFragment"
+        tools:layout="@layout/fragment_lobby">
 
         <argument
             android:name="playerNumber"
             app:argType="integer" />
 
         <action
-            android:id="@+id/action_lobyFragment_to_nfcFragment"
-            app:destination="@id/nfcFragment" />
+            android:id="@+id/action_lobbyFragment_to_itemsFragment"
+            app:destination="@id/itemsFragment" />
+        <action
+            android:id="@+id/action_lobbyFragment_to_startFragment"
+            app:destination="@id/startFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/nfcFragment"
+        android:id="@+id/itemsFragment"
         android:name="fr.mastersid.pic2.escapegame.view.ItemsFragment"
-        android:label="ItemFragment"
+        android:label="ItemsFragment"
         tools:layout="@layout/fragment_items">
         <argument
             android:name="playerNumber"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_nfcFragment_to_enigmaFragment"
-            app:destination="@id/enigmaFragment" />
     </fragment>
-
 
     <fragment
         android:id="@+id/enigmaFragment"
@@ -53,6 +54,4 @@
             android:name="enigma"
             app:argType="integer"/>
     </fragment>
-
-
 </navigation>
