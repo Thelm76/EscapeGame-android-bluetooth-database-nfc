@@ -65,6 +65,7 @@ class EGBluetooth @Inject constructor(
     var handler = Handler(Looper.getMainLooper()) { msg ->
         when (msg.what) {
             MESSAGE_READ -> {
+                _message.value = ""
                 val readBuff = msg.obj as ByteArray
                 _message.value = String(readBuff, 0, msg.arg1)
             }
