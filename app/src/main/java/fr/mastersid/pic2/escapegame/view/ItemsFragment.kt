@@ -40,31 +40,43 @@ class ItemsFragment : Fragment() {
         itemsViewModel.item1.observe(this) { item ->
             _binding.itemDesc.text = item.desc
             item.img?.let {
-                Glide.with(this).load(it).into(_binding.imageviewItem)
-                Glide.with(this).load(it).into(_binding.imageviewItem1)
+                Glide.with(this)
+                    .load(it)
+                    .placeholder(R.drawable.slot)
+                    .into(_binding.imageviewItem)
+                Glide.with(this)
+                    .load(it)
+                    .placeholder(R.drawable.no_item)
+                    .into(_binding.imageviewItem1)
             }
         }
 
         itemsViewModel.item2.observe(this) { item ->
             _binding.itemDesc.text = item.desc
             item.img?.let {
-                Glide.with(this).load(it).into(_binding.imageviewItem2)
+                Glide.with(this)
+                    .load(it)
+                    .placeholder(R.drawable.no_item)
+                    .into(_binding.imageviewItem2)
             }
         }
 
         itemsViewModel.item3.observe(this) { item ->
             item.img?.let {
-                Glide.with(this).load(it).into(_binding.imageviewItem3)
+                Glide.with(this)
+                    .load(it)
+                    .placeholder(R.drawable.no_item)
+                    .into(_binding.imageviewItem3)
             }
         }
 
         _binding.buttonFusion.isVisible=(args.playerNumber==1)
         _binding.buttonFusion.setOnClickListener {
             itemsViewModel.sendRequestItem(2)
-            _binding.buttonSuivant.isEnabled = true
+            _binding.buttonNext.isEnabled = true
         }
 
-        _binding.buttonSuivant.setOnClickListener {
+        _binding.buttonNext.setOnClickListener {
             itemsViewModel.updateRandomEnigma()
         }
 

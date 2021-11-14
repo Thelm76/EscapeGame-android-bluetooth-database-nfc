@@ -5,25 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundBaseColor"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
         app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="0dp"
-        app:cardMaxElevation="0dp"
-        app:cardPreventCornerOverlap="false">
+        app:cardCornerRadius="3dp">
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:text="Vous avez les objets suivants :"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:text="@string/item_view_description"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
@@ -31,43 +28,53 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/imageview_item_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/no_item" />
 
         <ImageView
             android:id="@+id/imageview_item_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/no_item" />
 
         <ImageView
             android:id="@+id/imageview_item_3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/no_item" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:layout_marginVertical="20dp"
         android:layout_gravity="center">
 
         <ImageView
             android:id="@+id/imageview_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             app:srcCompat="@drawable/no_item" />
 
         <TextView
@@ -81,24 +88,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/button_fusion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:text="Fusionner" />
+            android:text="@string/button_fuse" />
 
         <Button
-            android:id="@+id/button_suivant"
+            android:id="@+id/button_next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-
             android:enabled="false"
-            android:text="Suivant" />
+            android:text="@string/button_next" />
     </LinearLayout>
 
 </LinearLayout>

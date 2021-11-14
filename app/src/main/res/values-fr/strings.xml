@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="player1">J1</string>
+    <string name="player2">J2</string>
+    <string name="player3">J3</string>
+    <string name="notice_escape_game">Choisissez un joueur pour commencer la partie</string>
+    <string name="notice_lobby">Attendez que tout le monde se connecte et cliquez sur jouer</string>
+    <string name="notice_items">Vous êtes coincés dans une pièce avec vos téléphones. Vous trouvez une seule issue, malheureusement verrouillée par un code… Cherchez différents objets autour de vous, vous pourrez peut-être vous en servir pour déverrouiller la porte!</string>
+    <string name="notice_enigma">Vous recollez les différents papiers… Une enigme apparait alors, et quatre réponses sont possibles. Une petite écriture quasiment illisible en bas de page indique : \"La seule issue de la pièce est déverrouillable avec un des codes ci-dessus. Cependant, une seule tentative de déverrouillage est possible. Le groupe du projet Iomere decline toute responsabilité en cas de problèmes liés au fait de rester coincé éternellement.\"</string>
+    <string name="lobby_view_description">En attente des joueurs</string>
+    <string name="item_view_description">Vous avez les objets suivants</string>
+    <string name="button_ok">ok</string>
+    <string name="button_play">Jouer</string>
+    <string name="button_fuse">Fusionner</string>
+    <string name="button_next">Suivant</string>
+</resources>

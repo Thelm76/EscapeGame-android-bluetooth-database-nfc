@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import fr.mastersid.pic2.escapegame.MainActivity
 import fr.mastersid.pic2.escapegame.R
 import fr.mastersid.pic2.escapegame.databinding.FragmentLobbyBinding
 import fr.mastersid.pic2.escapegame.viewModel.LobbyViewModel
@@ -22,6 +23,7 @@ class LobbyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLobbyBinding.inflate(inflater)
+        (activity as MainActivity).supportActionBar?.title = "Lobby"
         return _binding.root
     }
 

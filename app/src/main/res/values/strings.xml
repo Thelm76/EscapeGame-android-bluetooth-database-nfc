@@ -1,7 +1,16 @@
 <resources>
-    <string name="app_name">EscapeGame</string>
-    <string name="notice_items">Règles du jeu :  Chaque participant doit trouver un des objets ci-dessous, et le scanner avec le module NFC de son téléphone. Il n’est possible que de scanner un seul objet par joueur.</string>
-    <string name="notice_lobby">notice frag Lobby</string>
-    <string name="notice_enigma">notice frag Enigma</string>
-    <string name="notice_escape_game">notice frag EscapeGame</string>
+    <string name="app_name" translatable="false">EscapeGame</string>
+    <string name="player1">P1</string>
+    <string name="player2">P2</string>
+    <string name="player3">P3</string>
+    <string name="notice_escape_game">Choose a player to start</string>
+    <string name="notice_lobby">Wait until all players are connected then click play</string>
+    <string name="notice_items">You\'re stuck in a room with your phones. There is one only issue, unfortunately locked with password… Look around and find different items, you\'ll maybe able to use them to unlock that door!</string>
+    <string name="notice_enigma">You assemble the paper fragments… An enigma then appears, with four possible answers. A small barely readable writing on the bottom tells : \"The only room exit\'s code is one of these answers. Please choose carefully, as there is only one unlock attempt. The Iomere project workgroup declines all responsibility with regards to any problems occurring as a result of being stuck in this room forever.\"</string>
+    <string name="lobby_view_description">Waiting for players</string>
+    <string name="item_view_description">You got the following items</string>
+    <string name="button_ok">OK</string>
+    <string name="button_play">Play</string>
+    <string name="button_fuse">Fuse</string>
+    <string name="button_next">Next</string>
 </resources>
