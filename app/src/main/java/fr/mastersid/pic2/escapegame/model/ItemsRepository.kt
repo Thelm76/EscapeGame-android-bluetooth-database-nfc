@@ -61,13 +61,22 @@ class ItemsRepository @Inject constructor(
         })
     }
 
-    fun respondItem(user: Int, item: String){
-        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, "master", object: FirebaseCallback<EGFirebase.UsersItem> {
+    fun sendItem(from: Int, user: String, item: String) {
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
             override fun onCallback(value: EGFirebase.UsersItem) {
-                escapeGameBluetooth.respond("item$user:$item")
+                escapeGameBluetooth.writeTo(value.mac, "item$from:$item")
             }
         })
     }
+
+    fun respondItem(from: Int, item: String){
+        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, "master", object: FirebaseCallback<EGFirebase.UsersItem> {
+            override fun onCallback(value: EGFirebase.UsersItem) {
+                escapeGameBluetooth.respond("item$from:$item")
+            }
+        })
+    }
+
     fun fetchItem(item: String, itemNb: Int) {
         if (item.isNotBlank())
             escapeGameFirebase.fetchFrom(

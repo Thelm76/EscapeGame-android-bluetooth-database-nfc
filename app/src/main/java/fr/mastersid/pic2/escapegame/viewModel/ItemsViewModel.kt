@@ -42,26 +42,20 @@ class ItemsViewModel @Inject constructor(
         _playerNumber = playerNumber
     }
 
-    fun sendRequestItem(destPlayer:Int) {
-        when (destPlayer){
-            2-> itemsRepository.sendRequestItem("player2")
-            3-> itemsRepository.sendRequestItem("player3")
-        }
+    fun respondItem(item : String, playerNumber: Int ){
+        itemsRepository.respondItem(playerNumber,item)
     }
 
-    fun sendItemAs(item : String, playerNumber: Int ){
-        when (playerNumber){
+    fun sendItem(item: String, from: Int, to: Int) {
+        when (to){
             1->{
-                //itemsRepository.sendItem(2,item)
-                //itemsRepository.sendItem(3,item)
+                itemsRepository.sendItem(from,"master",item)
             }
             2->{
-                //itemsRepository.sendItem(3,item)
-                itemsRepository.respondItem(2,item)
+                itemsRepository.sendItem(from,"player2",item)
             }
             3->{
-                //itemsRepository.sendItem(2,item)
-                itemsRepository.respondItem(3,item)
+                itemsRepository.sendItem(from,"player3",item)
             }
         }
     }

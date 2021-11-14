@@ -88,11 +88,6 @@ class ItemsFragment : Fragment() {
             _binding.buttonNext.isEnabled = mergeable
         }
 
-        _binding.buttonFusion.isVisible=(args.playerNumber==1)
-        _binding.buttonFusion.setOnClickListener {
-            itemsViewModel.sendRequestItem(2)
-        }
-
         _binding.buttonNext.setOnClickListener {
             itemsViewModel.updateRandomEnigma()
         }
@@ -109,22 +104,32 @@ class ItemsFragment : Fragment() {
             }
         }
 
+        _binding.buttonFusion.isVisible=(args.playerNumber==1)
+        _binding.buttonFusion.setOnClickListener {
+            itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 2)
+        }
+
         itemsViewModel.messageBT.observe(this) { value ->
             when {
-                value == "fetch_item" -> {
+                value.startsWith("item1:") -> {
+                    itemsViewModel.updateItem(1, value.substring(6))
                     Log.d(
                         "ItemView",
                         "fetch item detected, sending item ${itemsViewModel.itemId.value}"
                     )
-                    itemsViewModel.sendItemAs(itemsViewModel.itemId.value ?: "", args.playerNumber)
+                    itemsViewModel.respondItem(itemsViewModel.item1.value!!.id, args.playerNumber)
+                    if (args.playerNumber==3)
+                        itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 3, 2)
                 }
                 value.startsWith("item2:") -> {
                     itemsViewModel.updateItem(2, value.substring(6))
                     if (args.playerNumber==1)
-                        itemsViewModel.sendRequestItem(3)
+                        itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 3)
                 }
                 value.startsWith("item3:") -> {
                     itemsViewModel.updateItem(3, value.substring(6))
+                    if (args.playerNumber==2)
+                        itemsViewModel.respondItem(itemsViewModel.item1.value!!.id, args.playerNumber)
                 }
             }
         }
