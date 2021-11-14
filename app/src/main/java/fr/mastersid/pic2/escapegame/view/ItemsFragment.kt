@@ -1,5 +1,6 @@
 package fr.mastersid.pic2.escapegame.view
 
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -82,6 +83,11 @@ class ItemsFragment : Fragment() {
             itemsViewModel.updateRandomEnigma()
         }
 
+        _binding.imageviewItem1.setOnLongClickListener{
+            itemsViewModel.cycleItem()
+            true
+        }
+
         itemsViewModel.randomEnigma.observe(this) { value ->
             if (value != -1) {
                 val action = ItemsFragmentDirections.actionItemsFragmentToEnigmaFragment(value)
@@ -100,6 +106,8 @@ class ItemsFragment : Fragment() {
                 }
                 value.startsWith("item2:") -> {
                     itemsViewModel.updateItem(2, value.substring(6))
+                    if (args.playerNumber==1)
+                        itemsViewModel.sendRequestItem(3)
                 }
                 value.startsWith("item3:") -> {
                     itemsViewModel.updateItem(3, value.substring(6))

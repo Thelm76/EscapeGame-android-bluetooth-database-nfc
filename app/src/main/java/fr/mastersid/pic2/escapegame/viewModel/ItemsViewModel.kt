@@ -72,4 +72,15 @@ class ItemsViewModel @Inject constructor(
     fun updateRandomEnigma(){
         itemsRepository.randomizeEnigma()
     }
+
+    fun cycleItem() {
+        itemsRepository.setItem(
+            when(_itemId.value) {
+                "obj1" -> "obj2"
+                "obj2" -> "obj3"
+                "obj3" -> ""
+                else -> "obj1"
+            }
+        )
+    }
 }

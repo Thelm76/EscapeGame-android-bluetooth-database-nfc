@@ -94,6 +94,10 @@ class ItemsRepository @Inject constructor(
             )
     }
 
+    fun setItem(itemId: String) {
+        _itemId.value=itemId
+    }
+
     data class Item(
         val id: String="",
         var desc: String="no item",
