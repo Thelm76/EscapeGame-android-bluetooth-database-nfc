@@ -8,8 +8,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -56,7 +56,7 @@ class EGBluetooth @Inject constructor(
             Log.d(TAG, "Bluetooth enabled : ${_bluetoothAdapter.isEnabled}")
             Log.d(TAG, "MAC : ${getBluetoothMacAddress()}")
 
-            GlobalScope.launch {
+            MainScope().launch(Dispatchers.IO) {
                 ServerThread().run()
             }
         }
@@ -75,10 +75,9 @@ class EGBluetooth @Inject constructor(
 
     fun writeTo(mac: String, message: String) {
         val device = _bluetoothAdapter?.getRemoteDevice(mac)
-
         if (device != null) {
             Log.d(TAG, "Device created : ${device.name}")
-            GlobalScope.launch {
+            MainScope().launch(Dispatchers.IO) {
                 ClientThread(device).run()
                 Log.d(TAG, "Connect thread created")
                 try {
@@ -96,7 +95,7 @@ class EGBluetooth @Inject constructor(
 
     fun respond(message:String) {
         Log.d(TAG, "responding $message")
-        GlobalScope.launch {
+        MainScope().launch(Dispatchers.IO) {
             serverManage.write(message.toByteArray())
             serverManage.cancel()
             ServerThread().run()
@@ -104,7 +103,7 @@ class EGBluetooth @Inject constructor(
     }
 
     fun getBluetoothMacAddress(): String {
-        //TODO (send request to connected device. For now, MAC hardcoded)
+        //TODO send request to connected device. For now, MAC hardcoded (meh)
         val id = Build.ID
         Log.d(TAG, id)
         return when (id.toString()) {
@@ -136,7 +135,7 @@ class EGBluetooth @Inject constructor(
                     null
                 }
                 socket?.also {
-                    GlobalScope.launch {
+                    MainScope().launch(Dispatchers.IO) {
                         serverManage = DataThread(socket)
                         serverManage.start()
                     }
