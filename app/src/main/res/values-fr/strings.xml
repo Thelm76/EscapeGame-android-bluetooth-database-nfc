@@ -13,4 +13,5 @@
     <string name="button_play">Jouer</string>
     <string name="button_merge">Fusionner</string>
     <string name="button_next">Suivant</string>
+    <string name="title_help">Aide</string>
 </resources>

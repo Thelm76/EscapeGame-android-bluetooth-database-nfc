@@ -34,8 +34,8 @@ class LobbyFragment : Fragment() {
         val args: LobbyFragmentArgs by navArgs()
 
         val playerNumber = args.playerNumber
-        val mac = lobbyViewModel.MacAddress()
-        lobbyViewModel.SaveMacAddress(mac, playerNumber)
+        val mac = lobbyViewModel.macAddress()
+        lobbyViewModel.saveMacAddress(mac, playerNumber)
 
         lobbyViewModel.usersConnected.observe(this) { value ->
             if (value.isNotEmpty()){

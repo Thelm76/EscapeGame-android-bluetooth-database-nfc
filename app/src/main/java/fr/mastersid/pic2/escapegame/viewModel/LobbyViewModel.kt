@@ -16,13 +16,12 @@ class LobbyViewModel @Inject constructor(
     private val _usersConnected : LiveData<List<Boolean>> = usersRepository.usersConnected.asLiveData()
     val usersConnected get() = _usersConnected
 
-    fun MacAddress() : String{
-        val Mac = lobbyRepository.getBluetoothMacAddress()
+    fun macAddress(): String {
         //Log.d("hello","ViewModel " + lobbyRepository.getBluetoothMacAddress())
-        return Mac
+        return lobbyRepository.getBluetoothMacAddress()
     }
 
-    fun SaveMacAddress(mac: String, playerNumber: Int){
+    fun saveMacAddress(mac: String, playerNumber: Int){
         lobbyRepository.saveMacAddress(mac,
             when (playerNumber){
                 1 -> "master"

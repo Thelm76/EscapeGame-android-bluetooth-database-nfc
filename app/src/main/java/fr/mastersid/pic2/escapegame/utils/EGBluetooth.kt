@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -24,17 +25,12 @@ import javax.inject.Singleton
 const val MESSAGE_READ: Int = 0
 const val MESSAGE_WRITE: Int = 1
 const val MESSAGE_TOAST: Int = 2
-const val MESSAGE_REQ_MAC: Int = 3
-const val MESSAGE_REQ_ITEMS: Int = 4
 // ... (Add other message types here as needed.)
 
 @Singleton
 class EGBluetooth @Inject constructor(
     @ApplicationContext appContext: Context
 ) {
-    val MY_UUID: UUID = UUID.fromString("8989063a-c9af-463a-b3f1-f21d9b2b827b")
-    val TAG = "EG_BT"
-
     private lateinit var manage: DataThread
     private lateinit var serverManage: DataThread
 
@@ -122,7 +118,9 @@ class EGBluetooth @Inject constructor(
 
     inner class ServerThread : Thread() {
         private val mmServerSocket: BluetoothServerSocket? by lazy(LazyThreadSafetyMode.NONE) {
-            _bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("EG_Bluetooth", MY_UUID)
+            _bluetoothAdapter?.listenUsingInsecureRfcommWithServiceRecord("EG_Bluetooth",
+                Companion.MY_UUID
+            )
         }
 
         override fun run() {
@@ -132,7 +130,7 @@ class EGBluetooth @Inject constructor(
                 val socket: BluetoothSocket? = try {
                     mmServerSocket?.accept()
                 } catch (e: IOException) {
-                    Log.e(TAG, "Socket's accept() method failed", e)
+                    Log.e(Companion.TAG, "Socket's accept() method failed", e)
                     shouldLoop = false
                     null
                 }
@@ -152,7 +150,7 @@ class EGBluetooth @Inject constructor(
             try {
                 mmServerSocket?.close()
             } catch (e: IOException) {
-                Log.e(TAG, "Could not close the connect socket", e)
+                Log.e(Companion.TAG, "Could not close the connect socket", e)
             }
         }
     }
@@ -161,23 +159,23 @@ class EGBluetooth @Inject constructor(
     inner class ClientThread(private val device: BluetoothDevice) : Thread() {
 
         private val btSocket: BluetoothSocket? by lazy(LazyThreadSafetyMode.NONE) {
-            device.createRfcommSocketToServiceRecord(MY_UUID)
+            device.createRfcommSocketToServiceRecord(Companion.MY_UUID)
         }
 
         override fun run() {
-            Log.d(TAG, "Start connect thread run to ${device.address}")
+            Log.d(Companion.TAG, "Start connect thread run to ${device.address}")
             // Cancel discovery because it otherwise slows down the connection.
             _bluetoothAdapter?.cancelDiscovery()
 
             btSocket?.let {
                 // Connect to the remote device through the socket. This call blocks
                 // until it succeeds or throws an exception.
-                Log.d(TAG, "Connecting bluetooth socket...")
+                Log.d(Companion.TAG, "Connecting bluetooth socket...")
                 try {
                     it.connect()
-                    Log.d(TAG, "Bluetooth socket connected")
+                    Log.d(Companion.TAG, "Bluetooth socket connected")
                 } catch (e: Exception) {
-                    Log.e(TAG, "No connection available : $e")
+                    Log.e(Companion.TAG, "No connection available : $e")
                     return
                 }
 
@@ -193,7 +191,7 @@ class EGBluetooth @Inject constructor(
             try {
                 btSocket?.close()
             } catch (e: IOException) {
-                Log.e(TAG, "Could not close the client socket", e)
+                Log.e(Companion.TAG, "Could not close the client socket", e)
             }
         }
     }
@@ -212,7 +210,7 @@ class EGBluetooth @Inject constructor(
                 numBytes = try { // on récupère le nombre d'octets à lire
                     btInStream.read(btBuffer) // on lit le buffer bluetooth
                 } catch (e: IOException) {
-                    Log.d(TAG, "InputStream déconnecté")
+                    Log.d(Companion.TAG, "InputStream disconnected")
                     break
                 }
 
@@ -253,8 +251,13 @@ class EGBluetooth @Inject constructor(
             try {
                 btSocket.close()
             } catch (e: IOException) {
-                Log.e(TAG, "Could not close the connect socket", e)
+                Log.e(Companion.TAG, "Could not close the connect socket", e)
             }
         }
+    }
+
+    companion object {
+        val MY_UUID: UUID = UUID.fromString("8989063a-c9af-463a-b3f1-f21d9b2b827b")
+        const val TAG = "EG_BT"
     }
 }

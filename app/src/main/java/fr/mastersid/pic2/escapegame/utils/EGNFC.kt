@@ -16,12 +16,10 @@ import javax.inject.Singleton
 
 @Singleton
 class EGNFC @Inject constructor(
-    @ApplicationContext appcontext: Context
+    @ApplicationContext appContext: Context
 ) {
     // Pending intent for NFC intent foreground dispatch.
     // Used to read all NDEF tags while the app is running in the foreground.
-
-    private val TAG = "EGNFC"
 
     private var _nfcAdapter: NfcAdapter? = null
     val nfcAdapter: NfcAdapter?
@@ -32,7 +30,7 @@ class EGNFC @Inject constructor(
 
     init {
         // Check if NFC is supported and enabled
-        _nfcAdapter = NfcAdapter.getDefaultAdapter(appcontext)
+        _nfcAdapter = NfcAdapter.getDefaultAdapter(appContext)
         Log.d(TAG, "NFC supported : " + (_nfcAdapter != null).toString())
         Log.d(TAG, "NFC enabled : " + (_nfcAdapter?.isEnabled).toString())
     }
@@ -40,7 +38,7 @@ class EGNFC @Inject constructor(
     fun processIntent(intent: Intent) {
         // Retrieve the raw NDEF message from the tag
         val rawMessages = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)
-        // Asssume we have 1x URI record
+        // Assume we have 1x URI record
         if (rawMessages != null && rawMessages.isNotEmpty()) {
             val ndefMsg = rawMessages[0] as NdefMessage
             if (ndefMsg.records != null && ndefMsg.records.isNotEmpty()) {
@@ -53,6 +51,10 @@ class EGNFC @Inject constructor(
                 }
             }
         }
+    }
+
+    companion object {
+        const val TAG = "egnfc"
     }
 }
 
