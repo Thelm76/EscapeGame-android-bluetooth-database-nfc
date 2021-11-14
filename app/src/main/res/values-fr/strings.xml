@@ -11,6 +11,6 @@
     <string name="item_view_description">Vous avez les objets suivants</string>
     <string name="button_ok">ok</string>
     <string name="button_play">Jouer</string>
-    <string name="button_fuse">Fusionner</string>
+    <string name="button_merge">Fusionner</string>
     <string name="button_next">Suivant</string>
 </resources>

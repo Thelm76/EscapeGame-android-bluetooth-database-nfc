@@ -1,10 +1,10 @@
 package fr.mastersid.pic2.escapegame.viewModel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.mastersid.pic2.escapegame.model.EnigmaRepository
 import fr.mastersid.pic2.escapegame.model.ItemsRepository
 import javax.inject.Inject
 
@@ -31,6 +31,9 @@ class ItemsViewModel @Inject constructor(
     private val _randomEnigma:LiveData<Int> = itemsRepository.randomEnigma.asLiveData()
     val randomEnigma get() = _randomEnigma
 
+    private val _mergeable:LiveData<Boolean> = itemsRepository.mergeable.asLiveData()
+    val mergeable:LiveData<Boolean> get()= _mergeable
+
     private var _playerNumber = -1
 
     fun setPlayerNumber(playerNumber: Int) {
@@ -38,7 +41,6 @@ class ItemsViewModel @Inject constructor(
     }
 
     fun sendRequestItem(destPlayer:Int) {
-
         when (destPlayer){
             2-> itemsRepository.sendRequestItem("player2")
             3-> itemsRepository.sendRequestItem("player3")

@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
 import fr.mastersid.pic2.escapegame.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -21,6 +22,9 @@ class ItemsRepository @Inject constructor(
 
     private val _item3: MutableStateFlow<Item> = MutableStateFlow(Item())
     val item3 get ()= _item3
+
+    private val _mergeable: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    val mergeable get ()= _mergeable
 
     private val _messageBT: MutableStateFlow<String> = escapeGameBluetooth.message
     val messageBT get() = _messageBT
@@ -80,6 +84,10 @@ class ItemsRepository @Inject constructor(
                                     2->_item2.value = Item(value.id,value.desc,it.result)
                                     3->_item3.value = Item(value.id,value.desc,it.result)
                                 }
+                                val i1 = _item1.value.id
+                                val i2 = _item2.value.id
+                                val i3 = _item3.value.id
+                                mergeable.value = (i1.isNotBlank()&&i2.isNotBlank()&&i3.isNotBlank()) && (i1!=i2 && i2!=i3 && i3!=i1)
                             }
                     }
                 }

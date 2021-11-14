@@ -52,7 +52,6 @@ class ItemsFragment : Fragment() {
         }
 
         itemsViewModel.item2.observe(this) { item ->
-            _binding.itemDesc.text = item.desc
             item.img?.let {
                 Glide.with(this)
                     .load(it)
@@ -70,10 +69,13 @@ class ItemsFragment : Fragment() {
             }
         }
 
+        itemsViewModel.mergeable.observe(this) { mergeable ->
+            _binding.buttonNext.isEnabled = mergeable
+        }
+
         _binding.buttonFusion.isVisible=(args.playerNumber==1)
         _binding.buttonFusion.setOnClickListener {
             itemsViewModel.sendRequestItem(2)
-            _binding.buttonNext.isEnabled = true
         }
 
         _binding.buttonNext.setOnClickListener {

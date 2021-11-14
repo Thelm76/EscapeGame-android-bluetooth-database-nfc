@@ -94,7 +94,7 @@
             android:id="@+id/button_fusion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/button_fuse" />
+            android:text="@string/button_merge" />
 
         <Button
             android:id="@+id/button_next"

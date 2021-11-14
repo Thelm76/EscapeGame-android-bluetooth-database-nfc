@@ -11,6 +11,6 @@
     <string name="item_view_description">You got the following items</string>
     <string name="button_ok">OK</string>
     <string name="button_play">Play</string>
-    <string name="button_fuse">Fuse</string>
+    <string name="button_merge">Merge</string>
     <string name="button_next">Next</string>
 </resources>
