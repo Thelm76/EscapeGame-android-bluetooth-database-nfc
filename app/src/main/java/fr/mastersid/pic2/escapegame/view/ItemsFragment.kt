@@ -40,34 +40,28 @@ class ItemsFragment : Fragment() {
 
         itemsViewModel.item1.observe(this) { item ->
             _binding.itemDesc.text = item.desc
-            item.img?.let {
                 Glide.with(this)
-                    .load(it)
+                    .load(item.img)
                     .placeholder(R.drawable.slot)
                     .into(_binding.imageviewItem)
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem1)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem1)
         }
 
         itemsViewModel.item2.observe(this) { item ->
-            item.img?.let {
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem2)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem2)
         }
 
         itemsViewModel.item3.observe(this) { item ->
-            item.img?.let {
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem3)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem3)
         }
 
         itemsViewModel.mergeable.observe(this) { mergeable ->
