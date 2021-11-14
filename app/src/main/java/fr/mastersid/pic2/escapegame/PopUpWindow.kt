@@ -26,7 +26,7 @@ class PopUpWindow : AppCompatActivity() {
 
         // Get the data
         val bundle = intent.extras
-        popupText = bundle?.getString("popuptext", "notice") ?: ""
+        popupText = bundle?.getString("popupText", "notice") ?: ""
         // Set the data
         _binding.popupWindowText.text = popupText
 

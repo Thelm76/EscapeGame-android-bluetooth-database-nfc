@@ -68,33 +68,20 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    //TODO allow text to be different depending on the current view, and move to strings.xml
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val intent = Intent(this, PopUpWindow::class.java)
         when (_binding.toolbar.title) {
             "EscapeGame" -> {
-                intent.putExtra(
-                    "popuptext",
-                    getString(R.string.notice_escape_game)
-                )
+                intent.putExtra("popupText",getString(R.string.notice_escape_game))
             }
             "Lobby" -> {
-                intent.putExtra(
-                    "popuptext",
-                    getString(R.string.notice_lobby)
-                )
+                intent.putExtra("popupText", getString(R.string.notice_lobby))
             }
             "Items" -> {
-                intent.putExtra(
-                    "popuptext",
-                    getString(R.string.notice_items)
-                )
+                intent.putExtra("popupText", getString(R.string.notice_items))
             }
             "Enigma" -> {
-                intent.putExtra(
-                    "popuptext",
-                    getString(R.string.notice_enigma)
-                )
+                intent.putExtra("popupText", getString(R.string.notice_enigma))
             }
         }
         startActivity(intent)
