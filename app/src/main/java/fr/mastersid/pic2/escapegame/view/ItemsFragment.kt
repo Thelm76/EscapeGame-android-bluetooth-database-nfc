@@ -1,11 +1,11 @@
 package fr.mastersid.pic2.escapegame.view
 
-import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -38,9 +38,29 @@ class ItemsFragment : Fragment() {
         //Needed to permit repository flow update...
         itemsViewModel.itemId.observe(this) {}
 
+        itemsViewModel.itemFinal.observe(this) { item ->
+            if (item.id.isNotBlank()){
+                val fadeOut =AlphaAnimation(1f,0f)
+                fadeOut.duration=1000
+                fadeOut.fillAfter=true
+                _binding.imageviewItem.startAnimation(fadeOut)
+                _binding.imageviewItem.postDelayed({
+                    Glide.with(this)
+                        .load(item.img)
+                        .placeholder(R.drawable.slot)
+                        .into(_binding.imageviewItem)
+                    val fadeIn = AlphaAnimation(0f, 1f)
+                    fadeIn.duration = 1000
+                    _binding.imageviewItem.startAnimation(fadeIn)
+                    _binding.itemDesc.text = item.desc
+                },1200)
+            }
+        }
+
         itemsViewModel.item1.observe(this) { item ->
             _binding.itemDesc.text = item.desc
-                Glide.with(this)
+            if (itemsViewModel.itemFinal.value!!.id.isEmpty())
+            Glide.with(this)
                     .load(item.img)
                     .placeholder(R.drawable.slot)
                     .into(_binding.imageviewItem)

@@ -2,9 +2,11 @@ package fr.mastersid.pic2.escapegame.model
 
 import android.util.Log
 import com.google.firebase.storage.FirebaseStorage
-import fr.mastersid.pic2.escapegame.utils.*
+import fr.mastersid.pic2.escapegame.utils.EGBluetooth
+import fr.mastersid.pic2.escapegame.utils.EGFirebase
+import fr.mastersid.pic2.escapegame.utils.EGNFC
+import fr.mastersid.pic2.escapegame.utils.FirebaseCallback
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -14,6 +16,9 @@ class ItemsRepository @Inject constructor(
     private val escapeGameBluetooth : EGBluetooth
     )
 {
+    private val _itemFinal: MutableStateFlow<Item> = MutableStateFlow(Item())
+    val itemFinal get ()= _itemFinal
+
     private val _item1: MutableStateFlow<Item> = MutableStateFlow(Item())
     val item1 get ()= _item1
 
@@ -24,27 +29,20 @@ class ItemsRepository @Inject constructor(
     val item3 get ()= _item3
 
     private val _mergeable: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    val mergeable get ()= _mergeable
+    val mergeable get ()= _mergeable.onEach { value ->
+        if (value) {
+            fetchItem("obj1+2+3",0)
+        } else {
+            fetchItem("",0)
+        }
+    }
 
     private val _messageBT: MutableStateFlow<String> = escapeGameBluetooth.message
     val messageBT get() = _messageBT
 
     private val _itemId: MutableStateFlow<String> = escapeGameNfc.lastScan
     val itemId get ()= _itemId.onEach { value->
-        if (value.isNotBlank())
-        escapeGameFirebase.fetchFrom(
-            EGFirebase.DB.ITEMS,
-            value,
-            object: FirebaseCallback<EGFirebase.ItemItem> {
-                override fun onCallback(value: EGFirebase.ItemItem) {
-                    FirebaseStorage.getInstance()
-                        .getReferenceFromUrl(value.img)
-                        .getBytes(Long.MAX_VALUE).addOnCompleteListener{
-                            _item1.value = Item(value.id,value.desc,it.result)
-                        }
-                }
-            }
-        )
+        fetchItem(value, 1)
     }
 
     private var _randomEnigma: MutableStateFlow<Int> = MutableStateFlow(-1)
@@ -81,17 +79,26 @@ class ItemsRepository @Inject constructor(
                             .getReferenceFromUrl(value.img)
                             .getBytes(Long.MAX_VALUE).addOnCompleteListener{
                                 when (itemNb) {
+                                    1->_item1.value = Item(value.id,value.desc,it.result)
                                     2->_item2.value = Item(value.id,value.desc,it.result)
                                     3->_item3.value = Item(value.id,value.desc,it.result)
+                                    0->_itemFinal.value = Item(value.id,value.desc,it.result)
                                 }
                                 val i1 = _item1.value.id
                                 val i2 = _item2.value.id
                                 val i3 = _item3.value.id
-                                mergeable.value = (i1.isNotBlank()&&i2.isNotBlank()&&i3.isNotBlank()) && (i1!=i2 && i2!=i3 && i3!=i1)
+                                _mergeable.value = (i1.isNotBlank()&&i2.isNotBlank()&&i3.isNotBlank()) && (i1!=i2 && i2!=i3 && i3!=i1)
                             }
                     }
                 }
             )
+        else
+            when (itemNb) {
+                1->_item1.value = Item()
+                2->_item2.value = Item()
+                3->_item3.value = Item()
+                0->_itemFinal.value = Item()
+            }
     }
 
     fun setItem(itemId: String) {
