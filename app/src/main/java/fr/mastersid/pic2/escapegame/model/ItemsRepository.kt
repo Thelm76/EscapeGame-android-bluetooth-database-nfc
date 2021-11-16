@@ -52,15 +52,6 @@ class ItemsRepository @Inject constructor(
         _randomEnigma.value=((1..6).random())
     }
 
-    fun sendRequestItem(user: String) {
-        Log.d("hello","repository item")
-        escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
-            override fun onCallback(value: EGFirebase.UsersItem) {
-                escapeGameBluetooth.writeTo(value.mac, "fetch_item")
-            }
-        })
-    }
-
     fun sendItem(from: Int, user: String, item: String) {
         escapeGameFirebase.fetchFrom(EGFirebase.DB.USERS, user, object: FirebaseCallback<EGFirebase.UsersItem> {
             override fun onCallback(value: EGFirebase.UsersItem) {

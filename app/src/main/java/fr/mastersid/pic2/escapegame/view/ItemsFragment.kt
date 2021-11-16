@@ -68,6 +68,8 @@ class ItemsFragment : Fragment() {
                 .load(item.img)
                 .placeholder(R.drawable.no_item)
                 .into(_binding.imageviewItem1)
+            if (itemsViewModel.item2.value?.id?.isEmpty() == false && itemsViewModel.item3.value?.id?.isEmpty() == false)
+                itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 2)
         }
 
         itemsViewModel.item2.observe(this) { item ->

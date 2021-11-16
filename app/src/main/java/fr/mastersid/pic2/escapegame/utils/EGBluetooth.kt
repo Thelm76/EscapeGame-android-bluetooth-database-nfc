@@ -112,6 +112,8 @@ class EGBluetooth @Inject constructor(
             "QKQ1.191215.002" -> "DC:B7:2E:6D:5D:0B" //AMEL
             "QKQ1.191002.002" -> "F4:60:E2:FF:EA:F3" //MI A2 Lite
             "RKQ1.200826.002" -> "98:F6:21:CB:FA:F1" //Mateo
+            "M1AJQ" -> "84:B5:41:26:f:BB" // Tablette Bryan
+            "HUAWEIRNE-L21" -> "34:2E:B6:F9:4D:F4" // Tablette Bryan
             else -> "02:00:00:00:00:00"
         }
     }
