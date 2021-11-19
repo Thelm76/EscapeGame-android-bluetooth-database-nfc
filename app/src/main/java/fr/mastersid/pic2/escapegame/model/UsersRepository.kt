@@ -5,13 +5,15 @@ import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import fr.mastersid.pic2.escapegame.utils.EGBluetooth
 import fr.mastersid.pic2.escapegame.utils.EGFirebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
-    private val escapeGameFirebase: EGFirebase
+    private val escapeGameFirebase: EGFirebase,
+    private val escapeGameBluetooth : EGBluetooth
 ) {
     private val _usersItems: MutableStateFlow<List<EGFirebase.UsersItem>> = MutableStateFlow(emptyList())
 
@@ -39,5 +41,15 @@ class UsersRepository @Inject constructor(
 
     fun setConnected (user: String, connected : Boolean){
         escapeGameFirebase.writeAttribute(EGFirebase.DB.USERS, user, "connected", connected)
+    }
+
+    fun getBluetoothMacAddress(): String {
+        return escapeGameBluetooth.getBluetoothMacAddress()
+    }
+
+    fun saveMacAddress(mac: String, user: String){
+        if (user.isNotBlank()){
+            escapeGameFirebase.writeAttribute(EGFirebase.DB.USERS, user, "mac", mac)
+        }
     }
 }

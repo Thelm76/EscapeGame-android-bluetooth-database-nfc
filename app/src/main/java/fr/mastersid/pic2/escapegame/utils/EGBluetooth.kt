@@ -75,6 +75,9 @@ class EGBluetooth @Inject constructor(
 
     fun writeTo(mac: String, message: String) {
         val device = _bluetoothAdapter?.getRemoteDevice(mac)
+
+        Log.d("MAC ADRESSES ", "real mac : $mac, device mac : ${device?.address}")
+
         if (device != null) {
             Log.d(TAG, "Device created : ${device.name}")
             MainScope().launch(Dispatchers.IO) {
@@ -113,7 +116,7 @@ class EGBluetooth @Inject constructor(
             "QKQ1.191002.002" -> "F4:60:E2:FF:EA:F3" //MI A2 Lite
             "RKQ1.200826.002" -> "98:F6:21:CB:FA:F1" //Mateo
             "M1AJQ" -> "84:B5:41:26:f:BB" // Tablette Bryan
-            "HUAWEIRNE-L21" -> "34:2E:B6:F9:4D:F4" // Tablette Bryan
+            "HUAWEIRNE-L21" -> "34:2E:B6:F9:4D:F4" // Bryan
             else -> "02:00:00:00:00:00"
         }
     }
