@@ -5,12 +5,15 @@ import android.content.Intent
 import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import fr.mastersid.pic2.escapegame.databinding.ActivityMainBinding
 import fr.mastersid.pic2.escapegame.utils.EGNFC
+import fr.mastersid.pic2.escapegame.view.ItemsFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -52,7 +55,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-        if (intent != null) processIntent(intent)
+            if (intent != null && _binding.toolbar.title.equals("Items"))
+                processIntent(intent)
+
     }
 
     private fun processIntent(checkIntent: Intent) {

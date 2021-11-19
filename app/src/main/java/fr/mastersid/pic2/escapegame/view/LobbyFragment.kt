@@ -59,9 +59,8 @@ class LobbyFragment : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val action =  LobbyFragmentDirections.actionLobbyFragmentToStartFragment(playerNumber)
                 lobbyViewModel.setDisconnected(playerNumber)
-                findNavController().navigate(action)
+                findNavController().popBackStack()
             }
         })
     }
