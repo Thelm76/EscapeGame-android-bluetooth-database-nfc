@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
@@ -37,47 +38,65 @@ class ItemsFragment : Fragment() {
         //Needed to permit repository flow update...
         itemsViewModel.itemId.observe(this) {}
 
+        itemsViewModel.itemFinal.observe(this) { item ->
+            if (item.id.isNotBlank()){
+                val fadeOut =AlphaAnimation(1f,0f)
+                fadeOut.duration=1000
+                fadeOut.fillAfter=true
+                _binding.imageviewItem.startAnimation(fadeOut)
+                _binding.imageviewItem.postDelayed({
+                    Glide.with(this)
+                        .load(item.img)
+                        .placeholder(R.drawable.slot)
+                        .into(_binding.imageviewItem)
+                    val fadeIn = AlphaAnimation(0f, 1f)
+                    fadeIn.duration = 1000
+                    _binding.imageviewItem.startAnimation(fadeIn)
+                    _binding.itemDesc.text = item.desc
+                },1200)
+            }
+        }
+
         itemsViewModel.item1.observe(this) { item ->
             _binding.itemDesc.text = item.desc
-            item.img?.let {
-                Glide.with(this)
-                    .load(it)
+            if (itemsViewModel.itemFinal.value!!.id.isEmpty())
+            Glide.with(this)
+                    .load(item.img)
                     .placeholder(R.drawable.slot)
                     .into(_binding.imageviewItem)
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem1)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem1)
+            if (itemsViewModel.item2.value?.id?.isEmpty() == false && itemsViewModel.item3.value?.id?.isEmpty() == false)
+                itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 2)
         }
 
         itemsViewModel.item2.observe(this) { item ->
-            _binding.itemDesc.text = item.desc
-            item.img?.let {
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem2)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem2)
         }
 
         itemsViewModel.item3.observe(this) { item ->
-            item.img?.let {
-                Glide.with(this)
-                    .load(it)
-                    .placeholder(R.drawable.no_item)
-                    .into(_binding.imageviewItem3)
-            }
+            Glide.with(this)
+                .load(item.img)
+                .placeholder(R.drawable.no_item)
+                .into(_binding.imageviewItem3)
         }
 
-        _binding.buttonFusion.isVisible=(args.playerNumber==1)
-        _binding.buttonFusion.setOnClickListener {
-            itemsViewModel.sendRequestItem(2)
-            _binding.buttonNext.isEnabled = true
+        itemsViewModel.mergeable.observe(this) { mergeable ->
+            _binding.buttonNext.isEnabled = mergeable
         }
 
         _binding.buttonNext.setOnClickListener {
             itemsViewModel.updateRandomEnigma()
+        }
+
+        _binding.imageviewItem1.setOnLongClickListener{
+            itemsViewModel.cycleItem()
+            true
         }
 
         itemsViewModel.randomEnigma.observe(this) { value ->
@@ -87,20 +106,32 @@ class ItemsFragment : Fragment() {
             }
         }
 
+        _binding.buttonFusion.isVisible=(args.playerNumber==1)
+        _binding.buttonFusion.setOnClickListener {
+            itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 2)
+        }
+
         itemsViewModel.messageBT.observe(this) { value ->
             when {
-                value == "fetch_item" -> {
+                value.startsWith("item1:") -> {
+                    itemsViewModel.updateItem(1, value.substring(6))
                     Log.d(
                         "ItemView",
                         "fetch item detected, sending item ${itemsViewModel.itemId.value}"
                     )
-                    itemsViewModel.sendItemAs(itemsViewModel.itemId.value ?: "", args.playerNumber)
+                    itemsViewModel.respondItem(itemsViewModel.item1.value!!.id, args.playerNumber)
+                    if (args.playerNumber==3)
+                        itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 3, 2)
                 }
                 value.startsWith("item2:") -> {
                     itemsViewModel.updateItem(2, value.substring(6))
+                    if (args.playerNumber==1)
+                        itemsViewModel.sendItem(itemsViewModel.item1.value!!.id, 1, 3)
                 }
                 value.startsWith("item3:") -> {
                     itemsViewModel.updateItem(3, value.substring(6))
+                    if (args.playerNumber==2)
+                        itemsViewModel.respondItem(itemsViewModel.item1.value!!.id, args.playerNumber)
                 }
             }
         }

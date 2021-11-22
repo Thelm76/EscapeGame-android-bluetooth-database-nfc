@@ -10,7 +10,6 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 class EGFirebase{
-    val TAG : String="FirebaseRepository"
 
     val database = FirebaseDatabase.getInstance("https://escapegamedatabase-default-rtdb.europe-west1.firebasedatabase.app/")
 
@@ -74,6 +73,10 @@ class EGFirebase{
         var aid3: String="",
         var aid4: String=""
     )
+
+    companion object {
+        const val TAG = "FirebaseRepository"
+    }
 }
 
 interface FirebaseCallback<T> {

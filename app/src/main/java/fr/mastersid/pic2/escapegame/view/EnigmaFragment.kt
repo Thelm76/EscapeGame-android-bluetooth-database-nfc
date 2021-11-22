@@ -31,9 +31,9 @@ class EnigmaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args:EnigmaFragmentArgs by navArgs()
-        Toast.makeText(context,"get ready for enigma number "+args.enigma,5).show()
+        Toast.makeText(context,"get ready for enigma number "+args.enigma, Toast.LENGTH_SHORT).show()
         val enigmaViewModel: EnigmaViewModel by viewModels()
-        //TODO db and args
+
         enigmaViewModel.updateEnigma(args.enigma)
 
         enigmaViewModel.enigma.observe(this){enigma->
@@ -45,25 +45,25 @@ class EnigmaFragment : Fragment() {
 
             _binding.btnAnswer1.setOnClickListener{
                 if (enigma.answer =="aid1"){
-                    Toast.makeText(context,"gg",10).show()
+                    Toast.makeText(context,"gg",Toast.LENGTH_LONG).show()
                     _binding.imageView6.isVisible=true
                 }
             }
             _binding.btnAnswer2.setOnClickListener{
                 if (enigma.answer=="aid2"){
-                    Toast.makeText(context,"gg",10).show()
+                    Toast.makeText(context,"gg",Toast.LENGTH_LONG).show()
                     _binding.imageView6.isVisible=true
                 }
             }
             _binding.btnAnswer3.setOnClickListener{
                 if (enigma.answer =="aid3"){
-                    Toast.makeText(context,"gg",10).show()
+                    Toast.makeText(context,"gg",Toast.LENGTH_LONG).show()
                     _binding.imageView6.isVisible=true
                 }
             }
             _binding.btnAnswer4.setOnClickListener{
                 if (enigma.answer =="aid4"){
-                    Toast.makeText(context,"gg",10).show()
+                    Toast.makeText(context,"gg",Toast.LENGTH_LONG).show()
                     _binding.imageView6.isVisible=true
                 }
             }

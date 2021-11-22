@@ -34,8 +34,8 @@ class LobbyFragment : Fragment() {
         val args: LobbyFragmentArgs by navArgs()
 
         val playerNumber = args.playerNumber
-        val mac = lobbyViewModel.MacAddress()
-        lobbyViewModel.SaveMacAddress(mac, playerNumber)
+        val mac = lobbyViewModel.macAddress()
+        lobbyViewModel.saveMacAddress(mac, playerNumber)
 
         lobbyViewModel.usersConnected.observe(this) { value ->
             if (value.isNotEmpty()){
@@ -59,9 +59,8 @@ class LobbyFragment : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                val action =  LobbyFragmentDirections.actionLobbyFragmentToStartFragment(playerNumber)
                 lobbyViewModel.setDisconnected(playerNumber)
-                findNavController().navigate(action)
+                findNavController().popBackStack()
             }
         })
     }
